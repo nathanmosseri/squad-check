@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  goals: 1
+  assists: 1
+  penalty_minutes: 1
+  plus_minus: 1
+  saves: 1
+  goals_allowed: 1
+  save_precentage: 1.5
+
+two:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  goals: 1
+  assists: 1
+  penalty_minutes: 1
+  plus_minus: 1
+  saves: 1
+  goals_allowed: 1
+  save_precentage: 1.5

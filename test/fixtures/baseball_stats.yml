@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  at_bats: 1
+  hits: 1
+  batting_average: 1.5
+  batter_strikeouts: 1
+  batter_walks: 1
+  runs_batted_in: 1
+  home_runs: 1
+  stolen_bases: 1
+  pitcher_strikeouts: 1
+  innings_pitched: 1.5
+  hits_allowed: 1
+  runs_allowed: 1
+  earned_run_average: 1.5
+  pitcher_walks: 1
+
+two:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  at_bats: 1
+  hits: 1
+  batting_average: 1.5
+  batter_strikeouts: 1
+  batter_walks: 1
+  runs_batted_in: 1
+  home_runs: 1
+  stolen_bases: 1
+  pitcher_strikeouts: 1
+  innings_pitched: 1.5
+  hits_allowed: 1
+  runs_allowed: 1
+  earned_run_average: 1.5
+  pitcher_walks: 1

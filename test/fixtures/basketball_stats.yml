@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  points: 1
+  assists: 1
+  blocks: 1
+  rebounds: 1
+  steals: 1
+  three_pointers_hit: 1
+  three_pointers_attempted: 1
+  three_pointer_percentage: 1.5
+
+two:
+  user_id: 1
+  team_id: 1
+  games_played: 1
+  points: 1
+  assists: 1
+  blocks: 1
+  rebounds: 1
+  steals: 1
+  three_pointers_hit: 1
+  three_pointers_attempted: 1
+  three_pointer_percentage: 1.5
