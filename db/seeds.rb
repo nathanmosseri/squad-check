@@ -92,6 +92,7 @@ end
 40.times do 
     Game.create!(
         team_id: Team.all.sample.id,
+        user_id: User.all.sample.id,
         opponent: Faker::Sports::Basketball.team,
         datetime: Faker::Time.between(from: '2022-10-20', to: '2023-2-25', format: :default),
         location: Faker::Address.full_address,
