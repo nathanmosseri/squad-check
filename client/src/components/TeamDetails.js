@@ -27,7 +27,6 @@ const [playerStats, setPlayerStats] = useState([])
 
 
     const games = teamGames.map((game, i) => {
-        // console.log(game)
         return (
         <div key={game.id + 3000}>
         <h4 key={game.datetime}>{game.datetime}</h4>
@@ -44,7 +43,6 @@ const [playerStats, setPlayerStats] = useState([])
     })
 
     const individualStats = playerStats.map((stat) => {
-        console.log(stat)
         return (
             <tr key={stat.id}>
                 <td key={stat.name}>{stat.name}</td>

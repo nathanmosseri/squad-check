@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 const Teams = ({userTeams}) => {
 
-    console.log(userTeams)
-
     const teams = userTeams.map((team) => {
        return (
         <div key={team.id}>

@@ -8,4 +8,9 @@ class BaseballStat < ApplicationRecord
     name.name
     end
 
+    def team_name
+        team = Team.find(self.team_id)
+        team.name
+    end
+
 end
