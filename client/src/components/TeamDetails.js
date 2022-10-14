@@ -65,6 +65,7 @@ const [playerStats, setPlayerStats] = useState([])
                 <img src={userTeams.logo} style={{height: '50px'}}/>
                 <h1>{userTeams.name}</h1>
                 <h4>{userTeams.league}</h4>
+                <h4>{userTeams.season}</h4>
                 <h4>{userTeams.description}</h4>
                 <h4>Record: {userTeams.wins} - {userTeams.loses} - {userTeams.ties}</h4>
             </div>

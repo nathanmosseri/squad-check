@@ -16,11 +16,12 @@ Game.destroy_all
     )
 end
 
-5.times do 
+6.times do 
     Team.create!(
         name: Faker::Sports::Basketball.team,
         logo: 'https://media.npr.org/assets/img/2020/06/10/gettyimages-200199027-001-b5fb3d8d8469ab744d9e97706fa67bc5c0e4fa40.jpg',
         league: Faker::Sports::Football.competition,
+        season: [2022, 2023, 2021, 2020].sample,
         description: Faker::Quote.yoda,
         wins: 0,
         loses: 0,

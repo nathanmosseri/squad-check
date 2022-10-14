@@ -7,4 +7,7 @@ class Team < ApplicationRecord
     has_many :basketball_stats
     has_many :baseball_stats
 
+    validates :name, presence: true
+    validates :season, presence: true
+
 end

@@ -10,6 +10,7 @@ const Teams = ({userTeams}) => {
             <img src={team.logo} style={{height: '50px'}}/>
             <h1 key={team.name}>{team.name}</h1>
             <h4 key={team.league}>{team.league}</h4>
+            <h4 key={team.season}>{team.season}</h4>
             </Link>
         </div>
        )

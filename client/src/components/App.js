@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Team from './Team';
 import MyProfile from './MyProfile';
 import Header from './Header'
+import NewTeamForm from './NewTeamForm';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
   const [userBasketballStats, setUserBasketballStats] = useState([])
 
   const getTeams = () => {
-    fetch(`http://localhost:3000/users/224`)
+    fetch(`http://localhost:3000/users/259`)
     .then(res => res.json())
     .then((data) => {
       setUserData(data)
@@ -41,6 +42,7 @@ function App() {
         <Route path=':id' element={<TeamDetails/>} />
       </Route>
       <Route path='my-profile' element={<MyProfile userData={userData} userBasketballStats={userBasketballStats} userBaseballStats={userBaseballStats} userHockeyStats={userHockeyStats}/>} />
+      <Route path='create-new-team' element={<NewTeamForm/>} />
     </Routes>
     </div>
   );

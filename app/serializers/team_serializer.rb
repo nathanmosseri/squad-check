@@ -1,5 +1,5 @@
 class TeamSerializer < ActiveModel::Serializer
-  attributes :id, :name, :logo, :league, :description, :wins, :loses, :ties, :overtime_loses
+  attributes :id, :name, :logo, :league, :season, :description, :wins, :loses, :ties, :overtime_loses
 
   has_many :games do
     object.games.order(:datetime)

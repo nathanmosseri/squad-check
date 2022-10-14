@@ -5,6 +5,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
     const hockeyStats = userHockeyStats.map((stat) => {
         return (
                 <tr key={stat.id}>
+                    <td>{stat.season}</td>
                     <td key={stat.name}>{stat.team_name}</td>
                     <td key={stat.games_played}>{stat.games_played}</td>
                     <td>{stat.goals}</td>
@@ -22,6 +23,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
         console.log(stat)
         return (           
                 <tr>
+                    <td>{stat.season}</td>
                     <td>{stat.team_name}</td>
                     <td>{stat.games_played}</td>
                     <td>{stat.at_bats}</td>
@@ -45,6 +47,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
     const basketballStats = userBasketballStats.map((stat) => {
         return (
             <tr>
+                <td>{stat.season}</td>
                 <td>{stat.team_name}</td>
                 <td>{stat.games_played}</td>
                 <td>{stat.points}</td>
@@ -69,6 +72,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userHockeyStats.length > 0 ?
             <table>
                 <tr>
+                    <th>Season</th>
                     <th>Team Name</th>
                     <th>Games Played</th>
                     <th>Goals</th>
@@ -88,6 +92,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userBaseballStats.length > 0 ? 
             <table>
                 <tr>
+                    <th>Season</th>
                     <th>Team Name</th>
                     <th>Games Played</th>
                     <th>At Bats</th>
@@ -114,6 +119,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userBasketballStats.length > 0 ? 
                 <table>
                     <tr>
+                        <th>Season</th>
                         <th>Team Name</th>
                         <th>Games Played</th>
                         <th>Points</th>

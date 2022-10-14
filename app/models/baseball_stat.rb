@@ -13,4 +13,9 @@ class BaseballStat < ApplicationRecord
         team.name
     end
 
+    def season
+        team = Team.find(self.team_id)
+        team.season
+    end
+
 end
