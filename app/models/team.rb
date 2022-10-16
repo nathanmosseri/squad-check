@@ -9,5 +9,6 @@ class Team < ApplicationRecord
 
     validates :name, presence: true
     validates :season, presence: true
+    validates :sport, presence: true
 
 end

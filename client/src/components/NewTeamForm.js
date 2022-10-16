@@ -4,6 +4,7 @@ const NewTeamForm = () => {
 
     const [newTeamFormData, setNewTeamFormData] = useState({
         name: '',
+        sport: '',
         season: '',
         league: '',
         logo: '',
@@ -30,6 +31,12 @@ const NewTeamForm = () => {
         <div>
             <form onSubmit={handleSubmit}>
             <input placeholder="Team Name" name="name" onChange={handleChange}/>
+            <select name="sport" onChange={handleChange}>
+                <option>Select a Sport</option>
+                <option>Hockey</option>
+                <option>Baseball</option>
+                <option>Basketball</option>
+            </select>
             <select name="season" onChange={handleChange}>
                 <option>Select the year your season will start</option>
                 <option>{new Date().getFullYear()}</option>
