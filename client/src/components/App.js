@@ -15,22 +15,33 @@ function App() {
   const [userHockeyStats, setUserHockeyStats] = useState([])
   const [userBaseballStats, setUserBaseballStats] = useState([])
   const [userBasketballStats, setUserBasketballStats] = useState([])
+  const [loginData, setLoginData] = useState({username: '', password: ''})
+  const [signupData, setSignupData] = useState({
+    username: '',
+    password: '',
+    name: '',
+    email: '',
+    phone_number: ''
+  })
 
-  const getTeams = () => {
-    fetch(`http://localhost:3000/users/259`)
-    .then(res => res.json())
-    .then((data) => {
-      setUserData(data)
-      setUserTeams(data.teams)
-      setUserHockeyStats(data.hockey_stats)
-      setUserBaseballStats(data.baseball_stats)
-      setUserBasketballStats(data.basketball_stats)
-    })
-  }
 
-  useEffect(() => {
-    getTeams()
-  }, [])
+
+
+  // const getTeams = () => {
+  //   fetch(`http://localhost:3000/users/259`)
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     setUserData(data)
+  //     setUserTeams(data.teams)
+  //     setUserHockeyStats(data.hockey_stats)
+  //     setUserBaseballStats(data.baseball_stats)
+  //     setUserBasketballStats(data.basketball_stats)
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   getTeams()
+  // }, [])
   
 
   return (
