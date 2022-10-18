@@ -5,4 +5,5 @@ class HockeyStatsController < ApplicationController
         render json: hockey
     end
 
+
 end

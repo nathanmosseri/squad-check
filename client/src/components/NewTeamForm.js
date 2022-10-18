@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewTeamForm = () => {
+const NewTeamForm = ({isLoggedIn}) => {
 
     const [newTeamFormData, setNewTeamFormData] = useState({
         name: '',
@@ -24,11 +24,24 @@ const NewTeamForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        let token = localStorage.getItem('token')
         console.log(newTeamFormData)
+        fetch('http://localhost:3000/teams', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(newTeamFormData)
+        }).then(res => res.json())
+        .then((data) => {
+            console.log(data)
+        })
     }
 
     return (
         <div>
+            {isLoggedIn ? (
             <form onSubmit={handleSubmit}>
             <input placeholder="Team Name" name="name" onChange={handleChange}/>
             <select name="sport" onChange={handleChange}>
@@ -47,6 +60,10 @@ const NewTeamForm = () => {
             <input placeholder="Team Description" name="description" onChange={handleChange}/>
             <input type='submit' />
             </form>
+            )
+            :
+            <h1>please log in</h1>
+            }
         </div>
     )
 }

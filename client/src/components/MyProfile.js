@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseballStats}) => {
+const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseballStats, isLoggedIn}) => {
 
     const hockeyStats = userHockeyStats.map((stat) => {
         return (

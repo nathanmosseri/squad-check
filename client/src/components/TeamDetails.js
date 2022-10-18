@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const TeamDetails = () => {
+const TeamDetails = ({userData}) => {
 
 const {id} = useParams()
 
@@ -12,13 +12,26 @@ const [teamRoster, setTeamRoster] = useState([])
 const [playerStats, setPlayerStats] = useState([])
 
     const getTeamDetails = () => {
-        fetch(`http://localhost:3000/teams/${id}`).then(res => res.json())
+        let token = localStorage.getItem('token')
+        // if(token && !userData.username){
+        fetch(`http://localhost:3000/teams/${id}`, {
+            headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+        }).then(res => res.json())
         .then((data) => {
             setUserTeams(data)
             setTeamGames(data.games)
             setTeamRoster(data.users)
-            setPlayerStats(data.hockey_stats)
+            if(data.hockey_stats.length <= 0 && data.baseball_stats.length <= 0){
+                setPlayerStats(data.basketball_stats)
+            } else if (data.basketball_stats.length <= 0 && data.baseball_stats.length <= 0){
+                setPlayerStats(data.hockey_stats)
+            } else if (data.hockey_stats.length <= 0 && data.basketball_stats.length <= 0){
+                setPlayerStats(data.baseball_stats)
+            }
         })
+    // }
     }
 
     useEffect(() => {
@@ -43,24 +56,29 @@ const [playerStats, setPlayerStats] = useState([])
     })
 
     const individualStats = playerStats.map((stat) => {
-        return (
-            <tr key={stat.id}>
-                <td key={stat.name}>{stat.name}</td>
-                <td key={stat.games_played}>{stat.games_played}</td>
-                <td>{stat.goals}</td>
-                <td>{stat.assists}</td>
-                <td>{stat.penalty_minutes}</td>
-                <td>{stat.plus_minus}</td>
-                <td>{stat.saves}</td>
-                <td>{stat.goals_allowed}</td>
-                <td>{stat.save_precentage}</td>
-            </tr>
-        )
+        const tableHead = Object.keys(stat).map((key, i) => {
+            console.log(key)
+            return <th key={i}>{key.split('_').join(' ')}</th>
+        })
+        return tableHead
+        // return (
+        //     <tr key={stat.id}>
+        //         <td key={stat.name}>{stat.name}</td>
+        //         <td key={stat.games_played}>{stat.games_played}</td>
+        //         <td>{stat.goals}</td>
+        //         <td>{stat.assists}</td>
+        //         <td>{stat.penalty_minutes}</td>
+        //         <td>{stat.plus_minus}</td>
+        //         <td>{stat.saves}</td>
+        //         <td>{stat.goals_allowed}</td>
+        //         <td>{stat.save_precentage}</td>
+        //     </tr>
+        // )
     })
     
     return (
         <div>
-            <Link to='/'>Back</Link>
+            <Link to='/teams'>Back</Link>
             <div>
                 <img src={userTeams.logo} style={{height: '50px'}}/>
                 <h1>{userTeams.name}</h1>
@@ -82,17 +100,8 @@ const [playerStats, setPlayerStats] = useState([])
             <div>
                 <table>
                     <tr>
-                        <th>Player</th>
-                        <th>Games Played</th>
-                        <th>Goals</th>
-                        <th>Assists</th>
-                        <th>Penalty Minutes</th>
-                        <th>+/-</th>
-                        <th>Saves</th>
-                        <th>Goals Allowed</th>
-                        <th>Save %</th>
+                        {individualStats}       
                     </tr>
-                    {individualStats}
                 </table>
             </div>
         </div>

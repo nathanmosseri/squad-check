@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     before_action :authorized, only: [:show]
     
-    #rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
     #rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable
 
     def index 
@@ -10,14 +10,14 @@ class UsersController < ApplicationController
         render json: users
     end
 
-    # def show 
-    #     user = find_user
-    #     render json: user, serializer: UsershowwithteamsSerializer
-    # end
-
     def show 
-        render json: {user: @current_user}, serializer: UsershowwithteamsSerializer
+        render json: @current_user, serializer: UsershowwithteamsSerializer
     end
+
+    # def show 
+    #     puts "hi #{@current_user}"
+    #     render json: {user: @current_user}, serializer: UserSerializer
+    # end
 
     def create 
         @user = User.create!(user_params)
@@ -35,6 +35,8 @@ class UsersController < ApplicationController
         if (@user && @user.authenticate(params[:password]))
             token = JWT.encode({user_id: @user.id}, 'secret')
             render json: {user: @user, token: token}
+        else
+            render json: {error: 'Username or Password Incorrect'}
         end
     end
 

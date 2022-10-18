@@ -10,5 +10,6 @@ class User < ApplicationRecord
     has_many :basketball_stats
     has_many :baseball_stats
 
+    
 end
 

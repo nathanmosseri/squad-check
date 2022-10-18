@@ -1,4 +1,4 @@
 class TeamHockeyStatsSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :team_id, :games_played, :goals, :assists, :penalty_minutes, :plus_minus, :saves, :goals_allowed, :save_precentage, :name
+  attributes :name, :games_played, :goals, :assists, :penalty_minutes, :plus_minus, :save_precentage, :saves, :goals_allowed
 
 end

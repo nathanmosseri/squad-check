@@ -26,7 +26,8 @@ end
         wins: 0,
         loses: 0,
         ties: 0,
-        overtime_loses: 0
+        overtime_loses: 0,
+        sport: ['Hockey', 'Baseball', 'Basketball'].sample
     )
 end
 
