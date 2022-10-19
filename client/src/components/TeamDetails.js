@@ -55,10 +55,12 @@ const [playerStats, setPlayerStats] = useState([])
         return <li key={member.id}>{member.name}</li>
     })
 
-    const individualStats = playerStats.map((stat) => {
+    const statsHeaders = playerStats.map((stat) => {
+        console.log(Object.values(stat))
         const tableHead = Object.keys(stat).map((key, i) => {
-            console.log(key)
-            return <th key={i}>{key.split('_').join(' ')}</th>
+            return (
+            <th key={i}>{key.split('_').join(' ')}</th>
+            )
         })
         return tableHead
         // return (
@@ -75,6 +77,22 @@ const [playerStats, setPlayerStats] = useState([])
         //     </tr>
         // )
     })
+
+        const statData = playerStats.map((stat) => {
+             const tableData = Object.values(stat).map((value, i) => {
+               return (
+                    <td>{value}</td>
+                
+                )
+            })
+            return (
+                <tbody>
+                <tr>
+                    {tableData}
+                </tr>
+                </tbody>
+            )
+        })
     
     return (
         <div>
@@ -99,9 +117,14 @@ const [playerStats, setPlayerStats] = useState([])
             </div>
             <div>
                 <table>
+                    <thead>
                     <tr>
-                        {individualStats}       
+                        {statsHeaders}       
                     </tr>
+                    </thead>
+                    {/* <tr> */}
+                    {statData}
+                    {/* </tr> */}
                 </table>
             </div>
         </div>
