@@ -13,11 +13,13 @@ class TeamsController < ApplicationController
         render json: team
     end
 
-    def create 
+    def create
         token = request.headers["Authorization"].split(' ')[1]
         user_id = JWT.decode(token, 'secret', true, algorithm: 'HS256')
         user = User.find(user_id[0]["user_id"])
-        team = Team.create!(team_params)
+        tp = team_params
+        tp[:uid] = SecureRandom.uuid 
+        team = Team.create!(tp)
         membership = Membership.create!(user_id: user.id, team_id: team.id)
         if team.sport == 'Hockey'
             HockeyStat.create!(user_id: user.id, team_id: team.id, games_played: 0, goals: 0, assists: 0, penalty_minutes: 0, plus_minus: 0, saves: 0, goals_allowed: 0, save_precentage: 0)
@@ -44,7 +46,7 @@ class TeamsController < ApplicationController
     end
 
     def team_params
-        params.permit(:name, :logo, :league, :season, :sport, :description, :wins, :loses, :ties, :overtime_loses)
+        params.permit(:name, :logo, :league, :season, :sport, :description, :wins, :loses, :ties, :overtime_loses, :uid)
     end
 
 end

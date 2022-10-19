@@ -10,6 +10,7 @@ const [userTeams, setUserTeams] = useState([])
 const [teamGames, setTeamGames] = useState([])
 const [teamRoster, setTeamRoster] = useState([])
 const [playerStats, setPlayerStats] = useState([])
+const [keys, setKeys] = useState([])
 
     const getTeamDetails = () => {
         let token = localStorage.getItem('token')
@@ -25,10 +26,13 @@ const [playerStats, setPlayerStats] = useState([])
             setTeamRoster(data.users)
             if(data.hockey_stats.length <= 0 && data.baseball_stats.length <= 0){
                 setPlayerStats(data.basketball_stats)
+                setKeys(data.basketball_stats[0])
             } else if (data.basketball_stats.length <= 0 && data.baseball_stats.length <= 0){
                 setPlayerStats(data.hockey_stats)
+                setKeys(data.hockey_stats[0])
             } else if (data.hockey_stats.length <= 0 && data.basketball_stats.length <= 0){
                 setPlayerStats(data.baseball_stats)
+                setKeys(data.baseball_stats[0])
             }
         })
     // }
@@ -54,28 +58,11 @@ const [playerStats, setPlayerStats] = useState([])
     const roster = teamRoster.map((member) => {
         return <li key={member.id}>{member.name}</li>
     })
-
-    const statsHeaders = playerStats.map((stat) => {
-        console.log(Object.values(stat))
-        const tableHead = Object.keys(stat).map((key, i) => {
-            return (
-            <th key={i}>{key.split('_').join(' ')}</th>
-            )
-        })
-        return tableHead
-        // return (
-        //     <tr key={stat.id}>
-        //         <td key={stat.name}>{stat.name}</td>
-        //         <td key={stat.games_played}>{stat.games_played}</td>
-        //         <td>{stat.goals}</td>
-        //         <td>{stat.assists}</td>
-        //         <td>{stat.penalty_minutes}</td>
-        //         <td>{stat.plus_minus}</td>
-        //         <td>{stat.saves}</td>
-        //         <td>{stat.goals_allowed}</td>
-        //         <td>{stat.save_precentage}</td>
-        //     </tr>
-        // )
+    
+    const statsHeaders = Object.keys(keys).map((key, i) => {
+        return (
+        <th key={i}>{key.split('_').join(' ')}</th>
+        )
     })
 
         const statData = playerStats.map((stat) => {

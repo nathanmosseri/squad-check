@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_175939) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_19_154542) do
   create_table "baseball_stats", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
@@ -96,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_175939) do
     t.datetime "updated_at", null: false
     t.integer "season"
     t.string "sport"
+    t.string "uid"
   end
 
   create_table "users", force: :cascade do |t|
