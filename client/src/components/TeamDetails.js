@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import NewGameForm from "./NewGameForm";
 
-const TeamDetails = ({userData}) => {
+const TeamDetails = ({gameCreated, setGameCreated}) => {
 
 const {id} = useParams()
 
@@ -11,37 +12,50 @@ const [teamGames, setTeamGames] = useState([])
 const [teamRoster, setTeamRoster] = useState([])
 const [playerStats, setPlayerStats] = useState([])
 const [keys, setKeys] = useState([])
+const [isAdmin, setIsAdmin] = useState([])
 
     const getTeamDetails = () => {
         let token = localStorage.getItem('token')
-        // if(token && !userData.username){
         fetch(`http://localhost:3000/teams/${id}`, {
             headers: {
                     'Authorization': `Bearer ${token}`
                 }
         }).then(res => res.json())
         .then((data) => {
-            setUserTeams(data)
-            setTeamGames(data.games)
-            setTeamRoster(data.users)
-            if(data.hockey_stats.length <= 0 && data.baseball_stats.length <= 0){
-                setPlayerStats(data.basketball_stats)
-                setKeys(data.basketball_stats[0])
-            } else if (data.basketball_stats.length <= 0 && data.baseball_stats.length <= 0){
-                setPlayerStats(data.hockey_stats)
-                setKeys(data.hockey_stats[0])
-            } else if (data.hockey_stats.length <= 0 && data.basketball_stats.length <= 0){
-                setPlayerStats(data.baseball_stats)
-                setKeys(data.baseball_stats[0])
+            console.log(data.team.games)
+            setIsAdmin(data.is_admin)
+            setUserTeams(data.team)
+            setTeamGames(data.team.games)
+            setTeamRoster(data.team.users)
+            if(data.team.hockey_stats.length <= 0 && data.team.baseball_stats.length <= 0){
+                setPlayerStats(data.team.basketball_stats)
+                setKeys(data.team.basketball_stats[0])
+            } else if (data.team.basketball_stats.length <= 0 && data.baseball_stats.length <= 0){
+                setPlayerStats(data.team.hockey_stats)
+                setKeys(data.team.hockey_stats[0])
+            } else if (data.team.hockey_stats.length <= 0 && data.team.basketball_stats.length <= 0){
+                setPlayerStats(data.team.baseball_stats)
+                setKeys(data.team.baseball_stats[0])
             }
         })
-    // }
     }
 
     useEffect(() => {
         getTeamDetails()
-    }, [])
+    }, [gameCreated])
 
+    const attendance = (users) => {
+        const thing = users.map((user) => {
+            if(user.attending === null){
+                return <li>{user.name} is undecided</li>
+            } else if(user.attending === true) {
+                return <li>{user.name} is coming</li>
+            } else {
+                return <li>{user.name} is not coming</li>
+            }
+        })
+        return thing
+    }
 
     const games = teamGames.map((game, i) => {
         return (
@@ -50,7 +64,12 @@ const [keys, setKeys] = useState([])
         <h4 key={game.opponent}>{game.opponent}</h4>
         <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
         <h4 key={game.location}>{game.location}</h4>
-        <h3 key={i - 3000}>{game.result}</h3>
+        <h3 key={i - 3000}>{game.points_for} - {game.points_against}</h3>
+        <button>In</button>
+        <button>Out</button>
+        <ul>
+        {attendance(game.attendings)}
+        </ul>
         </div>
         )
     })
@@ -80,7 +99,7 @@ const [keys, setKeys] = useState([])
                 </tbody>
             )
         })
-    
+
     return (
         <div>
             <Link to='/teams'>Back</Link>
@@ -90,7 +109,11 @@ const [keys, setKeys] = useState([])
                 <h4>{userTeams.league}</h4>
                 <h4>{userTeams.season}</h4>
                 <h4>{userTeams.description}</h4>
+                {isAdmin? <h4>Join Code: {userTeams.uid}</h4> : null}
                 <h4>Record: {userTeams.wins} - {userTeams.loses} - {userTeams.ties}</h4>
+            </div>
+            <div>
+                {isAdmin ? <NewGameForm setGameCreated={setGameCreated}/> : null}
             </div>
             <div>
                 <h2>Schedule:</h2>

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const NewTeamForm = ({isLoggedIn}) => {
+const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
+
+    const navigate = useNavigate()
 
     const [joinTeamCode, setJoinTeamCode] = useState({uid: ''})
     const [newTeamFormData, setNewTeamFormData] = useState({
@@ -26,7 +29,6 @@ const NewTeamForm = ({isLoggedIn}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        console.log(newTeamFormData)
         fetch('http://localhost:3000/teams', {
             method: 'POST',
             headers: {
@@ -36,7 +38,12 @@ const NewTeamForm = ({isLoggedIn}) => {
             body: JSON.stringify(newTeamFormData)
         }).then(res => res.json())
         .then((data) => {
-            console.log(data)
+            if(data.errors){
+                alert(data.errors)
+            } else {
+                setNewTeamSubmitted(prev => !prev)
+                navigate(`/teams/team/${data.id}`)
+            }
         })
     }
 
@@ -46,10 +53,26 @@ const NewTeamForm = ({isLoggedIn}) => {
             [e.target.name]: e.target.value
         })
     }
-    console.log(joinTeamCode)
 
     const handleJoinSubmit = (e) => {
         e.preventDefault()
+        let token = localStorage.getItem('token')
+        fetch('http://localhost:3000/memberships', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(joinTeamCode)
+        }).then(res => res.json())
+        .then((data) => {
+            if(data.error){
+                alert(data.error)
+            } else {
+                setTeamJoined(prev => !prev)
+                navigate(`/teams/team/${data.team_id}`)
+            }
+        })
     }
 
     return (

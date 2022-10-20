@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_19_154542) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
+  create_table "attendings", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "user_id"
+    t.boolean "attending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
   create_table "baseball_stats", force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
@@ -59,6 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_19_154542) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "points_against"
+    t.integer "points_for"
   end
 
   create_table "hockey_stats", force: :cascade do |t|
@@ -81,6 +92,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_19_154542) do
     t.integer "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
   end
 
   create_table "teams", force: :cascade do |t|

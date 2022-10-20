@@ -12,7 +12,7 @@ class MembershipsController < ApplicationController
         user_id = JWT.decode(token, 'secret', true, algorithm: 'HS256')
         user = User.find(user_id[0]["user_id"])
         team = Team.find_by!(uid: params[:uid])
-        member = Membership.create!(user_id: user.id, team_id: team.id)
+        member = Membership.create!(user_id: user.id, team_id: team.id, admin: false)
         if team.sport == 'Hockey'
             HockeyStat.create!(user_id: user.id, team_id: team.id, games_played: 0, goals: 0, assists: 0, penalty_minutes: 0, plus_minus: 0, saves: 0, goals_allowed: 0, save_precentage: 0)
         elsif team.sport == 'Baseball'

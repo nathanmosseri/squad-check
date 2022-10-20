@@ -9,8 +9,16 @@ class TeamsController < ApplicationController
     end
 
     def show
+        #check if @current_user === params.admin
         team = find_team
-        render json: team
+        if @current_user.id == team.admin.user_id
+            is_admin = true
+
+        else
+            is_admin = false
+        end
+        render json: {team: TeamSerializer.new(team), is_admin: is_admin}
+        
     end
 
     def create
@@ -20,7 +28,7 @@ class TeamsController < ApplicationController
         tp = team_params
         tp[:uid] = SecureRandom.uuid 
         team = Team.create!(tp)
-        membership = Membership.create!(user_id: user.id, team_id: team.id)
+        membership = Membership.create!(user_id: user.id, team_id: team.id, admin: true)
         if team.sport == 'Hockey'
             HockeyStat.create!(user_id: user.id, team_id: team.id, games_played: 0, goals: 0, assists: 0, penalty_minutes: 0, plus_minus: 0, saves: 0, goals_allowed: 0, save_precentage: 0)
         elsif team.sport == 'Baseball'

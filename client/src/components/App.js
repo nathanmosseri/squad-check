@@ -21,6 +21,9 @@ function App() {
   const [userHockeyStats, setUserHockeyStats] = useState([])
   const [userBaseballStats, setUserBaseballStats] = useState([])
   const [userBasketballStats, setUserBasketballStats] = useState([])
+  const [newTeamSubmitted, setNewTeamSubmitted] = useState(false)
+  const [teamJoined, setTeamJoined] = useState(false)
+  const [gameCreated, setGameCreated] = useState(false)
   const [loginData, setLoginData] = useState({username: '', password: ''})
   const [signupData, setSignupData] = useState({
     username: '',
@@ -39,7 +42,6 @@ useEffect(() => {
                 }
             }).then(res => res.json())
             .then((data) => {
-              console.log(data)
               setUserData(data)
               setUserTeams(data.teams)
               setUserHockeyStats(data.hockey_stats)
@@ -48,25 +50,7 @@ useEffect(() => {
               setIsLoggedIn(true)
             })
         }
-    })
-
-    console.log(isLoggedIn)
-
-  // const getTeams = () => {
-  //   fetch(`http://localhost:3000/users/259`)
-  //   .then(res => res.json())
-  //   .then((data) => {
-  //     setUserData(data)
-  //     setUserTeams(data.teams)
-  //     setUserHockeyStats(data.hockey_stats)
-  //     setUserBaseballStats(data.baseball_stats)
-  //     setUserBasketballStats(data.basketball_stats)
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   getTeams()
-  // }, [])
+    }, [isLoggedIn, newTeamSubmitted, teamJoined])
   
 
   return (
@@ -74,14 +58,14 @@ useEffect(() => {
     <Header setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
     <Routes>
       <Route path='/' element={<LandingPage/>}/>
-      <Route path='login' element={<Login setIsLoggedIn={setIsLoggedIn} loginData={loginData} setLoginData={setLoginData} userData={userData} setUserData={setUserData}/>} />
+      <Route path='login' element={<Login setUserBasketballStats={setUserBasketballStats} setUserBaseballStats={setUserBaseballStats} setUserHockeyStats={setUserHockeyStats} setUserTeams={setUserTeams} setIsLoggedIn={setIsLoggedIn} loginData={loginData} setLoginData={setLoginData} userData={userData} setUserData={setUserData}/>} />
       <Route path='signup' element={<SignUp setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} signupData={signupData} setSignupData={setSignupData}/>} />
       <Route path='/teams' element={<Teams isLoggedIn={isLoggedIn} userTeams={userTeams}/>} />
       <Route path='teams/team' element={<Team/>}>
-        <Route path=':id' element={<TeamDetails userData={userData}/>} />
+        <Route path=':id' element={<TeamDetails userData={userData} gameCreated={gameCreated} setGameCreated={setGameCreated}/>} />
       </Route>
       <Route path='my-profile' element= {<MyProfile isLoggedIn={isLoggedIn} userData={userData} userBasketballStats={userBasketballStats} userBaseballStats={userBaseballStats} userHockeyStats={userHockeyStats}/>}/> 
-      <Route path='create-new-team' element={<NewTeamForm isLoggedIn={isLoggedIn}/>} />
+      <Route path='create-new-team' element={<NewTeamForm setTeamJoined={setTeamJoined} setNewTeamSubmitted={setNewTeamSubmitted} isLoggedIn={isLoggedIn}/>} />
     </Routes>
     </div>
   );

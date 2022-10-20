@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
-const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData}) => {
+const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, setUserTeams, setUserHockeyStats, setUserBaseballStats, setUserBasketballStats}) => {
 
     const navigate = useNavigate()
 
@@ -23,9 +23,7 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData}) 
         }).then((res) => res.json())
            .then((data) => {
             if(data.user){
-            console.log(data.user)
-            console.log(data)
-            setUserData(data.user)
+            setUserData(data)
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)
             navigate('/teams')
@@ -34,31 +32,6 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData}) 
             }
         })
     }
-
-    // useEffect(() => {
-    //     let token = localStorage.getItem('token')
-    //     if(token && !userData.username){
-    //         fetch('http://localhost:3000/me', {
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`
-    //             }
-    //         }).then(res => res.json())
-    //         .then((data) => {
-    //             if(data.userData){
-    //                 setUserData(data.user)
-    //                 setUserData(data)
-    //                 // setUserTeams(data.teams)
-    //                 // setUserHockeyStats(data.hockey_stats)
-    //                 // setUserBaseballStats(data.baseball_stats)
-    //                 // setUserBasketballStats(data.basketball_stats)
-    //             }
-    //         })
-    //     }
-    // })
-
-    // const logout = () => {
-    //     localStorage.removeItem('token')
-    // }
 
 
     return (

@@ -4,6 +4,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
 
     const hockeyStats = userHockeyStats.map((stat) => {
         return (
+            <tbody>
                 <tr key={stat.id}>
                     <td>{stat.season}</td>
                     <td key={stat.name}>{stat.team_name}</td>
@@ -16,12 +17,13 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td>{stat.goals_allowed}</td>
                     <td>{stat.save_precentage}</td>
                 </tr>
+            </tbody>
         )
     })
 
     const baseballStats = userBaseballStats.map((stat) => {
-        console.log(stat)
-        return (           
+        return (       
+            <tbody>
                 <tr>
                     <td>{stat.season}</td>
                     <td>{stat.team_name}</td>
@@ -41,29 +43,29 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td>{stat.runs_allowed}</td>
                     <td>{stat.hits_allowed}</td>
                 </tr>
+            </tbody>    
         )
     })
 
     const basketballStats = userBasketballStats.map((stat) => {
         return (
-            <tr>
-                <td>{stat.season}</td>
-                <td>{stat.team_name}</td>
-                <td>{stat.games_played}</td>
-                <td>{stat.points}</td>
-                <td>{stat.assists}</td>
-                <td>{stat.rebounds}</td>
-                <td>{stat.blocks}</td>
-                <td>{stat.steals}</td>
-                <td>{stat.three_pointer_percentage}</td>
-                <td>{stat.three_pointers_hit}</td>
-                <td>{stat.three_pointers_attempted}</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td>{stat.season}</td>
+                    <td>{stat.team_name}</td>
+                    <td>{stat.games_played}</td>
+                    <td>{stat.points}</td>
+                    <td>{stat.assists}</td>
+                    <td>{stat.rebounds}</td>
+                    <td>{stat.blocks}</td>
+                    <td>{stat.steals}</td>
+                    <td>{stat.three_pointer_percentage}</td>
+                    <td>{stat.three_pointers_hit}</td>
+                    <td>{stat.three_pointers_attempted}</td>
+                </tr>
+            </tbody>
         )
     })
-
-    console.log(userHockeyStats)
-    console.log(userBaseballStats)
 
     return (
         <div>
@@ -71,18 +73,20 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userHockeyStats.length > 0 ? <h2>Hockey Stats</h2>: null}
             {userHockeyStats.length > 0 ?
             <table>
-                <tr>
-                    <th>Season</th>
-                    <th>Team Name</th>
-                    <th>Games Played</th>
-                    <th>Goals</th>
-                    <th>Assists</th>
-                    <th>Penalty Minutes</th>
-                    <th>+/-</th>
-                    <th>Saves</th>
-                    <th>Goals Allowed</th>
-                    <th>Save %</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>Team Name</th>
+                        <th>Games Played</th>
+                        <th>Goals</th>
+                        <th>Assists</th>
+                        <th>Penalty Minutes</th>
+                        <th>+/-</th>
+                        <th>Saves</th>
+                        <th>Goals Allowed</th>
+                        <th>Save %</th>
+                    </tr>
+                </thead>
                 {hockeyStats}
             </table>
             :
@@ -91,25 +95,27 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userBaseballStats.length > 0 ? <h2>Baseball Stats</h2>: null}
             {userBaseballStats.length > 0 ? 
             <table>
-                <tr>
-                    <th>Season</th>
-                    <th>Team Name</th>
-                    <th>Games Played</th>
-                    <th>At Bats</th>
-                    <th>Batting Average</th>
-                    <th>Hits</th>
-                    <th>Home Runs</th>
-                    <th>RBIs</th>
-                    <th>Batter Strikeouts</th>
-                    <th>Batter Walks</th>
-                    <th>Stolen Bases</th>
-                    <th>Innings Pitched</th>
-                    <th>ERA</th>
-                    <th>Pitcher Strikeouts</th>
-                    <th>Pitcher Walks</th>
-                    <th>Runs Allowed</th>
-                    <th>Hits Allowed</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Season</th>
+                        <th>Team Name</th>
+                        <th>Games Played</th>
+                        <th>At Bats</th>
+                        <th>Batting Average</th>
+                        <th>Hits</th>
+                        <th>Home Runs</th>
+                        <th>RBIs</th>
+                        <th>Batter Strikeouts</th>
+                        <th>Batter Walks</th>
+                        <th>Stolen Bases</th>
+                        <th>Innings Pitched</th>
+                        <th>ERA</th>
+                        <th>Pitcher Strikeouts</th>
+                        <th>Pitcher Walks</th>
+                        <th>Runs Allowed</th>
+                        <th>Hits Allowed</th>
+                    </tr>
+                </thead>
                 {baseballStats}
             </table>    
             :
@@ -118,19 +124,21 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             {userBasketballStats.length > 0 ? <h2>Basketball Stats</h2> : null}
             {userBasketballStats.length > 0 ? 
                 <table>
-                    <tr>
-                        <th>Season</th>
-                        <th>Team Name</th>
-                        <th>Games Played</th>
-                        <th>Points</th>
-                        <th>Assists</th>
-                        <th>Rebounds</th>
-                        <th>Blocks</th>
-                        <th>Steals</th>
-                        <th>3 Point %</th>
-                        <th>3 Pointers Hit</th>
-                        <th>3 Pointers Attempted</th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Season</th>
+                            <th>Team Name</th>
+                            <th>Games Played</th>
+                            <th>Points</th>
+                            <th>Assists</th>
+                            <th>Rebounds</th>
+                            <th>Blocks</th>
+                            <th>Steals</th>
+                            <th>3 Point %</th>
+                            <th>3 Pointers Hit</th>
+                            <th>3 Pointers Attempted</th>
+                        </tr>
+                    </thead>
                     {basketballStats}
                 </table>
             :

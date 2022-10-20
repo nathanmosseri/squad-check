@@ -22,10 +22,7 @@ const SignUp = ({setUserData, setIsLoggedIn, signupData, setSignupData}) => {
             body: JSON.stringify(signupData)
         }).then((res) => res.json())
         .then((data) => {
-            console.log(data)
             if(data.user){
-            console.log(data.user)
-            console.log(data)
             setUserData(data.user)
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)

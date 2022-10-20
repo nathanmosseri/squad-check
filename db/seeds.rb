@@ -34,7 +34,8 @@ end
 50.times do 
     Membership.create!(
         user_id: User.all.sample.id,
-        team_id: Team.all.sample.id
+        team_id: Team.all.sample.id,
+        admin: [true, false].sample
     )
 end
 
@@ -99,9 +100,11 @@ end
         datetime: Faker::Time.between(from: '2022-10-20', to: '2023-2-25', format: :default),
         location: Faker::Address.full_address,
         home: [true, false].sample,
-        result: '0 - 0'
+        points_for: 0,
+        points_against: 0
     )
 end
+
 
 
 
