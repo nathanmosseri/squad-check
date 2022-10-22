@@ -8,7 +8,7 @@ const Header = ({setIsLoggedIn, isLoggedIn}) => {
     const logout = () => {
         localStorage.removeItem('token')
         setIsLoggedIn(false)
-        navigate('/login')
+        navigate('/')
     }
     return (
         <div>

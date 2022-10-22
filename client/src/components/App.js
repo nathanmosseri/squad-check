@@ -24,6 +24,7 @@ function App() {
   const [newTeamSubmitted, setNewTeamSubmitted] = useState(false)
   const [teamJoined, setTeamJoined] = useState(false)
   const [gameCreated, setGameCreated] = useState(false)
+  const [teamRoster, setTeamRoster] = useState([])
   const [loginData, setLoginData] = useState({username: '', password: ''})
   const [signupData, setSignupData] = useState({
     username: '',
@@ -62,7 +63,7 @@ useEffect(() => {
       <Route path='signup' element={<SignUp setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} signupData={signupData} setSignupData={setSignupData}/>} />
       <Route path='/teams' element={<Teams isLoggedIn={isLoggedIn} userTeams={userTeams}/>} />
       <Route path='teams/team' element={<Team/>}>
-        <Route path=':id' element={<TeamDetails userData={userData} gameCreated={gameCreated} setGameCreated={setGameCreated}/>} />
+        <Route path=':id' element={<TeamDetails teamRoster={teamRoster} setTeamRoster={setTeamRoster} userData={userData} gameCreated={gameCreated} setGameCreated={setGameCreated}/>} />
       </Route>
       <Route path='my-profile' element= {<MyProfile isLoggedIn={isLoggedIn} userData={userData} userBasketballStats={userBasketballStats} userBaseballStats={userBaseballStats} userHockeyStats={userHockeyStats}/>}/> 
       <Route path='create-new-team' element={<NewTeamForm setTeamJoined={setTeamJoined} setNewTeamSubmitted={setNewTeamSubmitted} isLoggedIn={isLoggedIn}/>} />

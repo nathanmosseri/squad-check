@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import NewGameForm from "./NewGameForm";
+import UpdateStatsForm from "./UpdateStatsForm";
 
-const TeamDetails = ({gameCreated, setGameCreated}) => {
+const TeamDetails = ({gameCreated, setGameCreated, teamRoster, setTeamRoster}) => {
 
 const {id} = useParams()
 
+const navigate = useNavigate()
+
 const [userTeams, setUserTeams] = useState([])
 const [teamGames, setTeamGames] = useState([])
-const [teamRoster, setTeamRoster] = useState([])
 const [playerStats, setPlayerStats] = useState([])
+const [teamSport, setTeamSport] = useState([])
 const [keys, setKeys] = useState([])
 const [isAdmin, setIsAdmin] = useState([])
+const [attendanceClick, setAttendanceClick] = useState(false)
+const [statsButtonClicked, setStatsButtonClicked] = useState(false)
 
     const getTeamDetails = () => {
         let token = localStorage.getItem('token')
@@ -22,7 +27,7 @@ const [isAdmin, setIsAdmin] = useState([])
                 }
         }).then(res => res.json())
         .then((data) => {
-            console.log(data.team.games)
+            setTeamSport(data.team.sport)
             setIsAdmin(data.is_admin)
             setUserTeams(data.team)
             setTeamGames(data.team.games)
@@ -42,22 +47,60 @@ const [isAdmin, setIsAdmin] = useState([])
 
     useEffect(() => {
         getTeamDetails()
-    }, [gameCreated])
+    }, [gameCreated, attendanceClick])
 
     const attendance = (users) => {
-        const thing = users.map((user) => {
+        let undecided = []
+        let coming = []
+        let notComing = []
+        
+        users.forEach((user) => {
             if(user.attending === null){
-                return <li>{user.name} is undecided</li>
+                undecided.push(user.name)
             } else if(user.attending === true) {
-                return <li>{user.name} is coming</li>
+                coming.push(user.name)
             } else {
-                return <li>{user.name} is not coming</li>
+                notComing.push(user.name)
             }
         })
-        return thing
+
+        return (
+            <div>
+                <p>In:</p>
+                <ul>
+                    {coming.map((user) => <li key={user}>{user}</li>)}
+                </ul>
+                <p>Out:</p>
+                <ul>
+                    {notComing.map((user) => <li key={user}>{user}</li>)}
+                </ul>
+                <p>Undecided:</p>
+                <ul>
+                    {undecided.map((user) => <li key={user}>{user}</li>)}
+                </ul>
+            </div>
+
+        )
     }
 
-    const games = teamGames.map((game, i) => {
+    const handleClick = (e, id) => {
+        let token = localStorage.getItem('token')
+        fetch(`http://localhost:3000/attendings/game/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+            body: JSON.stringify({attending: e.target.value})
+        }).then(res => res.json())
+        .then((data) => {
+            console.log(data)
+            setAttendanceClick(prev => !prev)
+        })
+    }
+    
+    const upcomingGames = teamGames.map((game, i) => {
+        if(game['past?'] === false){
         return (
         <div key={game.id + 3000}>
         <h4 key={game.datetime}>{game.datetime}</h4>
@@ -65,13 +108,27 @@ const [isAdmin, setIsAdmin] = useState([])
         <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
         <h4 key={game.location}>{game.location}</h4>
         <h3 key={i - 3000}>{game.points_for} - {game.points_against}</h3>
-        <button>In</button>
-        <button>Out</button>
-        <ul>
+        <button key={i + 2993992} value={true} onClick={(e) => handleClick(e, game.id)}>In</button>
+        <button key={i - 2993992} value={false} onClick={(e) => handleClick(e, game.id)}>Out</button>
         {attendance(game.attendings)}
-        </ul>
         </div>
         )
+        }
+    })
+
+    const pastGames = teamGames.map((game, i) => {
+        if(game['past?']){
+            return (
+                <div key={game.id + 3000} style={{backgroundColor: 'grey'}}>
+                <h4 key={game.datetime}>{game.datetime}</h4>
+                <h4 key={game.opponent}>{game.opponent}</h4>
+                <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
+                <h4 key={game.location}>{game.location}</h4>
+                <h3 key={i - 3000}>{game.points_for} - {game.points_against}</h3>
+                <UpdateStatsForm/>
+                </div>
+            )
+        }
     })
 
     const roster = teamRoster.map((member) => {
@@ -87,7 +144,7 @@ const [isAdmin, setIsAdmin] = useState([])
         const statData = playerStats.map((stat) => {
              const tableData = Object.values(stat).map((value, i) => {
                return (
-                    <td>{value}</td>
+                    <td key={i}>{value}</td>
                 
                 )
             })
@@ -102,7 +159,7 @@ const [isAdmin, setIsAdmin] = useState([])
 
     return (
         <div>
-            <Link to='/teams'>Back</Link>
+            <button onClick={() => navigate(-1)}>Back</button>
             <div>
                 <img src={userTeams.logo} style={{height: '50px'}}/>
                 <h1>{userTeams.name}</h1>
@@ -116,8 +173,12 @@ const [isAdmin, setIsAdmin] = useState([])
                 {isAdmin ? <NewGameForm setGameCreated={setGameCreated}/> : null}
             </div>
             <div>
-                <h2>Schedule:</h2>
-                {games}
+                <h2>Upcoming Games:</h2>
+                {upcomingGames}
+            </div>
+            <div>
+                <h2>Past Games:</h2>
+                {pastGames}
             </div>
             <div>
                 <ul>
@@ -132,9 +193,7 @@ const [isAdmin, setIsAdmin] = useState([])
                         {statsHeaders}       
                     </tr>
                     </thead>
-                    {/* <tr> */}
                     {statData}
-                    {/* </tr> */}
                 </table>
             </div>
         </div>

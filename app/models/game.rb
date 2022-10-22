@@ -6,4 +6,12 @@ class Game < ApplicationRecord
 
     validates :datetime, presence: true
 
+    def past?
+        if self.datetime < DateTime.now
+            true
+        else
+            false
+        end
+    end
+
 end

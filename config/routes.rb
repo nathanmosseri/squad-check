@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :attendings
+  # resources :attendings
   resources :games
   resources :baseball_stats
   resources :basketball_stats
@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'users#login'
   post '/logout', to: 'users#logout'
+
+  patch '/attendings/game/:game_id', to: 'attendings#update'
 
 end
