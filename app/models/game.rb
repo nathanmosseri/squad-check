@@ -14,4 +14,10 @@ class Game < ApplicationRecord
         end
     end
 
+    def formatted_date
+        self.datetime.strftime('%A, %B %d, %Y %I:%M%P')
+    end
+
+# Williams Marquardt
+
 end

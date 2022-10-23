@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 import NewGameForm from "./NewGameForm";
 import UpdateStatsForm from "./UpdateStatsForm";
 
@@ -18,6 +19,11 @@ const [keys, setKeys] = useState([])
 const [isAdmin, setIsAdmin] = useState([])
 const [attendanceClick, setAttendanceClick] = useState(false)
 const [statsButtonClicked, setStatsButtonClicked] = useState(false)
+const [gameScore, setGameScore] = useState({
+    points_for: 0,
+    points_against: 0
+})
+const [scoreUpdated, setScoreUpdated] = useState(false)
 
     const getTeamDetails = () => {
         let token = localStorage.getItem('token')
@@ -35,7 +41,7 @@ const [statsButtonClicked, setStatsButtonClicked] = useState(false)
             if(data.team.hockey_stats.length <= 0 && data.team.baseball_stats.length <= 0){
                 setPlayerStats(data.team.basketball_stats)
                 setKeys(data.team.basketball_stats[0])
-            } else if (data.team.basketball_stats.length <= 0 && data.baseball_stats.length <= 0){
+            } else if (data.team.basketball_stats.length <= 0 && data.team.baseball_stats.length <= 0){
                 setPlayerStats(data.team.hockey_stats)
                 setKeys(data.team.hockey_stats[0])
             } else if (data.team.hockey_stats.length <= 0 && data.team.basketball_stats.length <= 0){
@@ -47,7 +53,7 @@ const [statsButtonClicked, setStatsButtonClicked] = useState(false)
 
     useEffect(() => {
         getTeamDetails()
-    }, [gameCreated, attendanceClick])
+    }, [gameCreated, attendanceClick, scoreUpdated])
 
     const attendance = (users) => {
         let undecided = []
@@ -68,15 +74,15 @@ const [statsButtonClicked, setStatsButtonClicked] = useState(false)
             <div>
                 <p>In:</p>
                 <ul>
-                    {coming.map((user) => <li key={user}>{user}</li>)}
+                    {coming.map((user) => <li key={uuidv4()}>{user}</li>)}
                 </ul>
                 <p>Out:</p>
                 <ul>
-                    {notComing.map((user) => <li key={user}>{user}</li>)}
+                    {notComing.map((user) => <li key={uuidv4()}>{user}</li>)}
                 </ul>
                 <p>Undecided:</p>
                 <ul>
-                    {undecided.map((user) => <li key={user}>{user}</li>)}
+                    {undecided.map((user) => <li key={uuidv4()}>{user}</li>)}
                 </ul>
             </div>
 
@@ -94,7 +100,6 @@ const [statsButtonClicked, setStatsButtonClicked] = useState(false)
             body: JSON.stringify({attending: e.target.value})
         }).then(res => res.json())
         .then((data) => {
-            console.log(data)
             setAttendanceClick(prev => !prev)
         })
     }
@@ -102,64 +107,97 @@ const [statsButtonClicked, setStatsButtonClicked] = useState(false)
     const upcomingGames = teamGames.map((game, i) => {
         if(game['past?'] === false){
         return (
-        <div key={game.id + 3000}>
-        <h4 key={game.datetime}>{game.datetime}</h4>
-        <h4 key={game.opponent}>{game.opponent}</h4>
+        <div key={uuidv4()}>
+        <h4 key={uuidv4()}>{game.formatted_date}</h4>
+        <h4 key={uuidv4()}>{game.opponent}</h4>
         <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
-        <h4 key={game.location}>{game.location}</h4>
-        <h3 key={i - 3000}>{game.points_for} - {game.points_against}</h3>
-        <button key={i + 2993992} value={true} onClick={(e) => handleClick(e, game.id)}>In</button>
-        <button key={i - 2993992} value={false} onClick={(e) => handleClick(e, game.id)}>Out</button>
+        <h4 key={uuidv4()}>{game.location}</h4>
+        <h3 key={uuidv4()}>{game.points_for} - {game.points_against}</h3>
+        <button key={uuidv4()} value={true} onClick={(e) => handleClick(e, game.id)}>In</button>
+        <button key={uuidv4()} value={false} onClick={(e) => handleClick(e, game.id)}>Out</button>
         {attendance(game.attendings)}
         </div>
         )
         }
     })
 
+    const handleScoreChange = (e) => {
+        setGameScore({
+            ...gameScore,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleScoreSubmit = (e, id) => {
+        e.preventDefault()
+        let token = localStorage.getItem('token')
+        fetch(`http://localhost:3000/games/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+            body: JSON.stringify(gameScore)
+        }).then(res => res.json())
+        .then((data) => {
+            setScoreUpdated(prev => !prev)
+            setGameScore({
+                points_for: 0,
+                points_against: 0
+            })
+        })
+    }
+
     const pastGames = teamGames.map((game, i) => {
         if(game['past?']){
             return (
-                <div key={game.id + 3000} style={{backgroundColor: 'grey'}}>
-                <h4 key={game.datetime}>{game.datetime}</h4>
-                <h4 key={game.opponent}>{game.opponent}</h4>
+                <div key={uuidv4()} style={{backgroundColor: 'grey'}}>
+                <h4 key={uuidv4()}>{game.datetime}</h4>
+                <h4 key={uuidv4()}>{game.opponent}</h4>
                 <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
-                <h4 key={game.location}>{game.location}</h4>
-                <h3 key={i - 3000}>{game.points_for} - {game.points_against}</h3>
-                <UpdateStatsForm/>
+                <h4 key={uuidv4()}>{game.location}</h4>
+                <h3 key={uuidv4()}>{game.points_for} - {game.points_against}</h3>
+                {isAdmin ? <form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
+                    <label key={uuidv4()}>points for</label><input key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/> - <label key={uuidv4()}>points against</label><input key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> <input key={uuidv4()} type='submit'/>
+                </form> : null}
+                {isAdmin ? <UpdateStatsForm key={uuidv4()} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
                 </div>
             )
         }
     })
 
     const roster = teamRoster.map((member) => {
-        return <li key={member.id}>{member.name}</li>
+        return <li key={uuidv4()}>{member.name}</li>
     })
     
     const statsHeaders = Object.keys(keys).map((key, i) => {
+        if(key !== 'id'){
         return (
-        <th key={i}>{key.split('_').join(' ')}</th>
+        <th key={uuidv4()}>{key.split('_').join(' ')}</th>
         )
+        }
     })
 
-        const statData = playerStats.map((stat) => {
-             const tableData = Object.values(stat).map((value, i) => {
-               return (
-                    <td key={i}>{value}</td>
-                
-                )
-            })
+    const statData = playerStats.map((stat) => {
+        const tableData = Object.keys(stat).map((value, i) => {
+            if(value !== 'id'){
             return (
-                <tbody>
+                <td key={uuidv4()}>{stat[value]}</td>
+            )
+            }
+        })
+        return (
+            <tbody>
                 <tr>
                     {tableData}
                 </tr>
-                </tbody>
-            )
-        })
+            </tbody>
+        )
+    })
 
     return (
         <div>
-            <button onClick={() => navigate(-1)}>Back</button>
+            <button onClick={() => navigate('/teams')}>Back</button>
             <div>
                 <img src={userTeams.logo} style={{height: '50px'}}/>
                 <h1>{userTeams.name}</h1>

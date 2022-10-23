@@ -39,6 +39,12 @@ class TeamsController < ApplicationController
         render json: team, status: :created 
     end
 
+    def update
+        team = find_team
+        team.update!(team_params)
+        render json: team
+    end
+
     private 
 
     def render_not_found(exception)

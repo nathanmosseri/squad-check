@@ -21,6 +21,12 @@ class GamesController < ApplicationController
         render json: game, status: :created
     end
 
+    def update
+        game = find_game
+        game.update!(game_params)
+        render json: game
+    end
+
     private 
 
     def render_not_found
