@@ -187,8 +187,8 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
             }
         })
         return (
-            <tbody>
-                <tr>
+            <tbody key={uuidv4()}>
+                <tr key={uuidv4()}>
                     {tableData}
                 </tr>
             </tbody>

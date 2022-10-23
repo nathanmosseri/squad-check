@@ -1,20 +1,21 @@
 import React from "react";
+import {v4 as uuidv4} from 'uuid'
 
 const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseballStats, isLoggedIn}) => {
 
     const hockeyStats = userHockeyStats.map((stat) => {
         return (
-            <tbody>
+            <tbody key={uuidv4()}>
                 <tr key={stat.id}>
-                    <td>{stat.season}</td>
-                    <td key={stat.name}>{stat.team_name}</td>
-                    <td key={stat.games_played}>{stat.games_played}</td>
-                    <td>{stat.goals}</td>
-                    <td>{stat.assists}</td>
-                    <td>{stat.penalty_minutes}</td>
-                    <td>{stat.plus_minus}</td>
-                    <td>{stat.saves}</td>
-                    <td>{stat.goals_allowed}</td>
+                    <td key={uuidv4()}>{stat.season}</td>
+                    <td key={uuidv4()}>{stat.team_name}</td>
+                    <td key={uuidv4()}>{stat.games_played}</td>
+                    <td key={uuidv4()}>{stat.goals}</td>
+                    <td key={uuidv4()}>{stat.assists}</td>
+                    <td key={uuidv4()}>{stat.penalty_minutes}</td>
+                    <td key={uuidv4()}>{stat.plus_minus}</td>
+                    <td key={uuidv4()}>{stat.saves}</td>
+                    <td key={uuidv4()}>{stat.goals_allowed}</td>
                     {/* <td>{stat.save_precentage}</td> */}
                 </tr>
             </tbody>
@@ -23,25 +24,25 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
 
     const baseballStats = userBaseballStats.map((stat) => {
         return (       
-            <tbody>
-                <tr>
-                    <td>{stat.season}</td>
-                    <td>{stat.team_name}</td>
-                    <td>{stat.games_played}</td>
-                    <td>{stat.at_bats}</td>
+            <tbody key={uuidv4()}>
+                <tr key={uuidv4()}>
+                    <td key={uuidv4()}>{stat.season}</td>
+                    <td key={uuidv4()}>{stat.team_name}</td>
+                    <td key={uuidv4()}>{stat.games_played}</td>
+                    <td key={uuidv4()}>{stat.at_bats}</td>
                     {/* <td>{stat.batting_average}</td> */}
-                    <td>{stat.hits}</td>
-                    <td>{stat.home_runs}</td>
-                    <td>{stat.runs_batted_in}</td>
-                    <td>{stat.batter_strikeouts}</td>
-                    <td>{stat.batter_walks}</td>
-                    <td>{stat.stolen_bases}</td>
-                    <td>{stat.innings_pitched}</td>
+                    <td key={uuidv4()}>{stat.hits}</td>
+                    <td key={uuidv4()}>{stat.home_runs}</td>
+                    <td key={uuidv4()}>{stat.runs_batted_in}</td>
+                    <td key={uuidv4()}>{stat.batter_strikeouts}</td>
+                    <td key={uuidv4()}>{stat.batter_walks}</td>
+                    <td key={uuidv4()}>{stat.stolen_bases}</td>
+                    <td key={uuidv4()}>{stat.innings_pitched}</td>
                     {/* <td>{stat.earned_run_average}</td> */}
-                    <td>{stat.pitcher_strikeouts}</td>
-                    <td>{stat.pitcher_walks}</td>
-                    <td>{stat.runs_allowed}</td>
-                    <td>{stat.hits_allowed}</td>
+                    <td key={uuidv4()}>{stat.pitcher_strikeouts}</td>
+                    <td key={uuidv4()}>{stat.pitcher_walks}</td>
+                    <td key={uuidv4()}>{stat.runs_allowed}</td>
+                    <td key={uuidv4()}>{stat.hits_allowed}</td>
                 </tr>
             </tbody>    
         )
@@ -49,19 +50,19 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
 
     const basketballStats = userBasketballStats.map((stat) => {
         return (
-            <tbody>
-                <tr>
-                    <td>{stat.season}</td>
-                    <td>{stat.team_name}</td>
-                    <td>{stat.games_played}</td>
-                    <td>{stat.points}</td>
-                    <td>{stat.assists}</td>
-                    <td>{stat.rebounds}</td>
-                    <td>{stat.blocks}</td>
-                    <td>{stat.steals}</td>
+            <tbody key={uuidv4()}>
+                <tr key={uuidv4()}>
+                    <td key={uuidv4()}>{stat.season}</td>
+                    <td key={uuidv4()}>{stat.team_name}</td>
+                    <td key={uuidv4()}>{stat.games_played}</td>
+                    <td key={uuidv4()}>{stat.points}</td>
+                    <td key={uuidv4()}>{stat.assists}</td>
+                    <td key={uuidv4()}>{stat.rebounds}</td>
+                    <td key={uuidv4()}>{stat.blocks}</td>
+                    <td key={uuidv4()}>{stat.steals}</td>
                     {/* <td>{stat.three_pointer_percentage}</td> */}
-                    <td>{stat.three_pointers_hit}</td>
-                    <td>{stat.three_pointers_attempted}</td>
+                    <td key={uuidv4()}>{stat.three_pointers_hit}</td>
+                    <td key={uuidv4()}>{stat.three_pointers_attempted}</td>
                 </tr>
             </tbody>
         )
