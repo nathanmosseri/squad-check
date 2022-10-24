@@ -18,7 +18,7 @@ const [teamSport, setTeamSport] = useState([])
 const [keys, setKeys] = useState([])
 const [isAdmin, setIsAdmin] = useState([])
 const [attendanceClick, setAttendanceClick] = useState(false)
-const [statsButtonClicked, setStatsButtonClicked] = useState(false)
+const [statsUpdated, setStatsUpdated] = useState(false)
 const [gameScore, setGameScore] = useState({
     points_for: 0,
     points_against: 0
@@ -53,7 +53,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     useEffect(() => {
         getTeamDetails()
-    }, [gameCreated, attendanceClick, scoreUpdated])
+    }, [gameCreated, attendanceClick, scoreUpdated, statsUpdated])
 
     const attendance = (users) => {
         let undecided = []
@@ -160,7 +160,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 {isAdmin ? <form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
                     <label key={uuidv4()}>points for</label><input key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/> - <label key={uuidv4()}>points against</label><input key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> <input key={uuidv4()} type='submit'/>
                 </form> : null}
-                {isAdmin ? <UpdateStatsForm key={uuidv4()} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
+                {isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
                 </div>
             )
         }
