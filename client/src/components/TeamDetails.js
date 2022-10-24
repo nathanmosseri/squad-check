@@ -128,10 +128,10 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         })
     }
 
-    const handleScoreSubmit = (e, id) => {
+    const handleScoreSubmit = (e, gameId) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/games/${id}`, {
+        fetch(`http://localhost:3000/games/${gameId}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -146,6 +146,27 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 points_against: 0
             })
         })
+        
+        let recordObj = {}
+        if(gameScore.points_for > gameScore.points_against){
+            recordObj = {wins: 1}
+        } else if(gameScore.points_for < gameScore.points_against){
+            recordObj = {loses: 1}
+        } else if(gameScore.points_for === gameScore.points_against){
+            recordObj = {ties: 1}
+        }
+        fetch(`http://localhost:3000/teams/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(recordObj)
+        }).then(res => res.json())
+        .then((data) => {
+            
+        })
+
     }
 
     const pastGames = teamGames.map((game, i) => {
@@ -225,6 +246,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 </ul>
             </div>
             <div>
+                <h2>Stats</h2>
                 <table>
                     <thead>
                     <tr>

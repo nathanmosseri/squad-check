@@ -41,7 +41,10 @@ class TeamsController < ApplicationController
 
     def update
         team = find_team
-        team.update!(team_params)
+        win = team.wins.to_i + params[:wins].to_i
+        loss = team.loses.to_i + params[:loses].to_i
+        tie = team.ties.to_i + params[:ties].to_i
+        team.update!(wins: win, loses: loss, ties: tie,)
         render json: team
     end
 
