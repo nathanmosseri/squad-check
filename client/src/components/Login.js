@@ -27,6 +27,10 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, s
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)
             navigate('/teams')
+            setLoginData({
+                username: '',
+                password: ''
+            })
             } else {
                 alert(data.error)
             }

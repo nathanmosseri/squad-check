@@ -27,6 +27,13 @@ const SignUp = ({setUserData, setIsLoggedIn, signupData, setSignupData}) => {
             localStorage.setItem('token', data.token)
             setIsLoggedIn(true)
             navigate('/teams')
+            setSignupData({
+                username: '',
+                password: '',
+                name: '',
+                email: '',
+                phone_number: ''
+            })
             } else {
                 alert(data.errors)
             }

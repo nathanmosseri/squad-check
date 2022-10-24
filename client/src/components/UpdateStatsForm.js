@@ -69,18 +69,14 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
             return baseballStatsFormData
         }
     }
-    console.log(sportForm())
 
     const handleSubmit = (e) => {
         
         e.preventDefault()
-        let patchData = {}
         let token = localStorage.getItem('token')
         let sport;
         if (teamSport === 'Hockey'){
             sport = 'hockey_stats'
-            //loop
-                //patchData[key] = formData[key] + playerStats[key]
         } else if(teamSport === 'Baseball'){
             sport = 'baseball_stats'
         } else if(teamSport === 'Basketball'){
@@ -136,77 +132,3 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
 }
 
 export default UpdateStatsForm
-// const handleChange = (e, id, stats) => {
-//     console.log(stats)
-//     setBasketballStatsFormData({
-//     ...basketballStatsFormData,
-//     [e.target.name]: e.target.value
-//     })
-//     let token = localStorage.getItem('token')
-//     let sport;
-//     if (teamSport === 'Hockey'){
-//         sport = 'hockey_stats'
-//     } else if(teamSport === 'Baseball'){
-//         sport = 'baseball_stats'
-//     } else if(teamSport === 'Basketball'){
-//         sport = 'basketball_stats'
-//     }
-//     fetch(`http://localhost:3000/${sport}/${id}`, {
-//         method: 'PATCH',
-//         headers: {
-//             'content-type': 'application/json',
-//             'Authorization': `Bearer ${token}`
-//         },
-//         body: JSON.stringify(stats[e.target.name] += basketballStatsFormData)
-//     }).then(res => res.json())
-//     .then((data) => {
-//         console.log(data)
-//     })
-// }
-
-// const stats = playerStats.map((user) => {
-//     const statForm = Object.keys(user).map((data) => {
-//         if(data !== 'id' && data !== 'name'){
-//             return (
-//                 <td key={uuidv4()}><input onChange={(e) => handleChange(e, user.id, user)} name={data} min={data === 'plus_minus' ? null : 0} max={data === 'games_played' ? 1 : null} type='number'  key={uuidv4()}/></td>
-//             )
-//         }
-//     })
-//     return (
-//         <tbody key={uuidv4()}>
-//             <tr key={uuidv4()}>
-//                 <td key={uuidv4()}>{user.name}</td>
-//                 {statForm}
-//             </tr>
-//         </tbody>
-//     )
-// })
-
-// const headers = Object.keys(keys).map((key) => {
-//     if(key !== 'id'){
-//     return (
-//         <th key={uuidv4()}>{key.split('_').join(' ')}</th>
-//     )
-//     }
-// })
-
-// const handleSubmit = (e) => {
-//     e.preventDefault()
-//     console.log(basketballStatsFormData)
-// }
-
-// return (
-//     <div>
-//         <form onSubmit={handleSubmit}>
-//         <table>
-//             <thead>
-//                 <tr>
-//                     {headers}
-//                 </tr>
-//             </thead>
-//             {stats}
-//         </table>
-//         <input type='submit'/>
-//         </form>
-//     </div>
-// )
