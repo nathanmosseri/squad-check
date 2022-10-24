@@ -16,7 +16,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td key={uuidv4()}>{stat.plus_minus}</td>
                     <td key={uuidv4()}>{stat.saves}</td>
                     <td key={uuidv4()}>{stat.goals_allowed}</td>
-                    {/* <td>{stat.save_precentage}</td> */}
                 </tr>
             </tbody>
         )
@@ -30,7 +29,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td key={uuidv4()}>{stat.team_name}</td>
                     <td key={uuidv4()}>{stat.games_played}</td>
                     <td key={uuidv4()}>{stat.at_bats}</td>
-                    {/* <td>{stat.batting_average}</td> */}
                     <td key={uuidv4()}>{stat.hits}</td>
                     <td key={uuidv4()}>{stat.home_runs}</td>
                     <td key={uuidv4()}>{stat.runs_batted_in}</td>
@@ -38,7 +36,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td key={uuidv4()}>{stat.batter_walks}</td>
                     <td key={uuidv4()}>{stat.stolen_bases}</td>
                     <td key={uuidv4()}>{stat.innings_pitched}</td>
-                    {/* <td>{stat.earned_run_average}</td> */}
                     <td key={uuidv4()}>{stat.pitcher_strikeouts}</td>
                     <td key={uuidv4()}>{stat.pitcher_walks}</td>
                     <td key={uuidv4()}>{stat.runs_allowed}</td>
@@ -60,7 +57,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     <td key={uuidv4()}>{stat.rebounds}</td>
                     <td key={uuidv4()}>{stat.blocks}</td>
                     <td key={uuidv4()}>{stat.steals}</td>
-                    {/* <td>{stat.three_pointer_percentage}</td> */}
                     <td key={uuidv4()}>{stat.three_pointers_hit}</td>
                     <td key={uuidv4()}>{stat.three_pointers_attempted}</td>
                 </tr>
@@ -85,7 +81,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                         <th>+/-</th>
                         <th>Saves</th>
                         <th>Goals Allowed</th>
-                        {/* <th>Save %</th> */}
                     </tr>
                 </thead>
                 {hockeyStats}
@@ -102,7 +97,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                         <th>Team Name</th>
                         <th>Games Played</th>
                         <th>At Bats</th>
-                        {/* <th>Batting Average</th> */}
                         <th>Hits</th>
                         <th>Home Runs</th>
                         <th>RBIs</th>
@@ -110,7 +104,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                         <th>Batter Walks</th>
                         <th>Stolen Bases</th>
                         <th>Innings Pitched</th>
-                        {/* <th>ERA</th> */}
                         <th>Pitcher Strikeouts</th>
                         <th>Pitcher Walks</th>
                         <th>Runs Allowed</th>
@@ -135,7 +128,6 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                             <th>Rebounds</th>
                             <th>Blocks</th>
                             <th>Steals</th>
-                            {/* <th>3 Point %</th> */}
                             <th>3 Pointers Hit</th>
                             <th>3 Pointers Attempted</th>
                         </tr>

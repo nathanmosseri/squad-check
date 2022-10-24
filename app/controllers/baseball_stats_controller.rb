@@ -37,7 +37,7 @@ class BaseballStatsController < ApplicationController
     end
 
     def render_not_found
-        render json: {error: 'Stat not found'}, status: :not_found
+        render json: {error: 'Please select a player'}, status: :not_found
     end
 
 end

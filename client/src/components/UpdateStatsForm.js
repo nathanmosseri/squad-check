@@ -69,6 +69,7 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
             return baseballStatsFormData
         }
     }
+    console.log(sportForm())
 
     const handleSubmit = (e) => {
         
@@ -85,13 +86,13 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         } else if(teamSport === 'Basketball'){
             sport = 'basketball_stats'
         }
-        fetch(`http://localhost:3000/${sport}/${basketballStatsFormData.id}`, {
+        fetch(`http://localhost:3000/${sport}/${sportForm().id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(basketballStatsFormData)
+            body: JSON.stringify(sportForm())
         }).then(res => res.json())
         .then((data) => {
             if(data['error']){
@@ -107,7 +108,7 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         return (
             <div key={uuidv4()}>
                 <label key={uuidv4()}>{stat.split('_').join(' ')}</label>
-                <input onChange={handleChange} value={basketballStatsFormData[stat]} name={stat} placeholder={stat.split('_').join(' ')} type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
+                <input onChange={handleChange} value={sportForm()[stat]} name={stat} placeholder={stat.split('_').join(' ')} type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
             </div>
         )
     })
@@ -122,7 +123,7 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
             <>
         <h1>Update stats</h1>
         <form onSubmit={handleSubmit}>
-            <select value={basketballStatsFormData.id} name="id" onChange={handleChange}>
+            <select value={sportForm().id} name="id" onChange={handleChange}>
                 <option>Select a Player</option>
                 {playerDropdown}
             </select>
