@@ -27,6 +27,12 @@ class GamesController < ApplicationController
         render json: game
     end
 
+    def destroy 
+        game = find_game
+        game.destroy
+        head :no_content
+    end
+
     private 
 
     def render_not_found

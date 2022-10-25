@@ -2,7 +2,7 @@ class Game < ApplicationRecord
 
     belongs_to :team
     # belongs_to :user
-    has_many :attendings
+    has_many :attendings, dependent: :destroy
 
     validates :datetime, presence: true
 

@@ -21,6 +21,7 @@ const [teamSport, setTeamSport] = useState([])
 const [keys, setKeys] = useState([])
 const [isAdmin, setIsAdmin] = useState([])
 const [attendanceClick, setAttendanceClick] = useState(false)
+const [gameDeleted, setGameDeleted] = useState(false)
 const [gameScore, setGameScore] = useState({
     points_for: 0,
     points_against: 0
@@ -55,7 +56,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     useEffect(() => {
         getTeamDetails()
-    }, [gameCreated, attendanceClick, scoreUpdated, statsUpdated])
+    }, [gameCreated, attendanceClick, scoreUpdated, statsUpdated, gameDeleted])
 
     const attendance = (users) => {
         let undecided = []
@@ -105,6 +106,16 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
             setAttendanceClick(prev => !prev)
         })
     }
+
+    const handleGameDelete = (e, id) => {
+        let token = localStorage.getItem('token')
+        fetch(`http://localhost:3000/games/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => setGameDeleted(prev => !prev))
+    }
     
     const upcomingGames = teamGames.map((game, i) => {
         if(game['past?'] === false){
@@ -130,6 +141,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
             <ListGroup.Item>{game.location}</ListGroup.Item>
             <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
         </ListGroup>
+        {isAdmin ? <Button onClick={(e) => handleGameDelete(e, game.id)} variant="outline-danger" size="sm">Delete Game</Button> : null}
         </Card>
         </div>
         )
@@ -219,8 +231,8 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     </Form.Group>
                     - 
                     <Form.Group>
-                    <Form.Label key={uuidv4()}>points against</Form.Label>
                     <Form.Control key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> 
+                    <Form.Label key={uuidv4()}>points against</Form.Label>
                     </Form.Group>
                     <Button variant="light" type="submit">Submit</Button>
                     </Form> : null}

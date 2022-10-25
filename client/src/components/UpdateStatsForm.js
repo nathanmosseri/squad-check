@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import {v4 as uuidv4} from 'uuid'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
 
@@ -102,10 +105,10 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
     const statInputs = Object.keys(keys).map((stat) => {
         if(stat !== 'id' && stat !== 'name'){
         return (
-            <div key={uuidv4()}>
-                <label key={uuidv4()}>{stat.split('_').join(' ')}</label>
-                <input onChange={handleChange} value={sportForm()[stat]} name={stat}  type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
-            </div>
+            <Form.Group key={uuidv4()}>
+                <Form.Label key={uuidv4()}>{stat.split('_').join(' ')}</Form.Label>
+                <Form.Control onChange={handleChange} value={sportForm()[stat]} name={stat}  type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
+            </Form.Group>
         )
         }
     })
@@ -119,14 +122,16 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         return (
             <>
         <h5>Update stats</h5>
-        <form onSubmit={handleSubmit}>
-            <select value={sportForm().id} name="id" onChange={handleChange}>
-                <option>Select a Player</option>
-                {playerDropdown}
-            </select>
+        <Form onSubmit={handleSubmit}>
+            <Form.Group>
+                <Form.Select value={sportForm().id} name="id" onChange={handleChange}>
+                    <option>Select a Player</option>
+                    {playerDropdown}
+                </Form.Select>
+            </Form.Group>
             {statInputs}
-            <button type="submit">Save</button>
-        </form>
+            <Button type="submit">Save</Button>
+        </Form>
         </>
     )
     
