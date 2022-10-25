@@ -1,7 +1,9 @@
 import React from "react";
 import {v4 as uuidv4} from 'uuid'
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseballStats, isLoggedIn}) => {
+const MyProfile = ({ userData, userHockeyStats, userBasketballStats, userBaseballStats, isLoggedIn}) => {
 
     const hockeyStats = userHockeyStats.map((stat) => {
         return (
@@ -69,7 +71,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
             <h1>{userData.name}</h1>
             {userHockeyStats.length > 0 ? <h2>Hockey Stats</h2>: null}
             {userHockeyStats.length > 0 ?
-            <table>
+            <Table striped bordered hover variant="dark" size="sm">
                 <thead>
                     <tr>
                         <th>Season</th>
@@ -84,13 +86,13 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     </tr>
                 </thead>
                 {hockeyStats}
-            </table>
+            </Table>
             :
             null    
             }
             {userBaseballStats.length > 0 ? <h2>Baseball Stats</h2>: null}
             {userBaseballStats.length > 0 ? 
-            <table>
+            <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Season</th>
@@ -111,13 +113,13 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                     </tr>
                 </thead>
                 {baseballStats}
-            </table>    
+            </Table>    
             :
                 null
             }
             {userBasketballStats.length > 0 ? <h2>Basketball Stats</h2> : null}
             {userBasketballStats.length > 0 ? 
-                <table>
+                <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
                             <th>Season</th>
@@ -133,7 +135,7 @@ const MyProfile = ({userData, userHockeyStats, userBasketballStats, userBaseball
                         </tr>
                     </thead>
                     {basketballStats}
-                </table>
+                </Table>
             :
                 null
             }

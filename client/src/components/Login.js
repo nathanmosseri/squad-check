@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, setUserTeams, setUserHockeyStats, setUserBaseballStats, setUserBasketballStats}) => {
 
@@ -39,14 +42,32 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, s
 
 
     return (
+        // <div>
+        //     <h1>Log In</h1>
+        //     <form onSubmit={handleSubmit}>
+        //         <input value={loginData.username} name="username" placeholder="username" onChange={handleChange}/>
+        //         <input value={loginData.password} name="password" placeholder="password" type='password' onChange={handleChange}/>
+        //         <input type='submit' />
+        //     </form>
+        //     <p>Not a memeber? <Link to='/signup'>Sign Up</Link></p>
+        // </div>
         <div>
-            <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
-                <input value={loginData.username} name="username" placeholder="username" onChange={handleChange}/>
-                <input value={loginData.password} name="password" placeholder="password" type='password' onChange={handleChange}/>
-                <input type='submit' />
-            </form>
-            <p>Not a memeber? <Link to='/signup'>Sign Up</Link></p>
+        <h1>Log In</h1>
+        <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control value={loginData.username} name="username" placeholder="Enter Username" onChange={handleChange} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control value={loginData.password} name="password" type="password" placeholder="Password" onChange={handleChange}/>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+            Submit
+        </Button>
+        </Form>
+        <p>Not a member? <Link to='/signup'>Sign Up</Link></p>
         </div>
     )
 }

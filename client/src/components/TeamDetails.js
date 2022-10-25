@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import NewGameForm from "./NewGameForm";
 import UpdateStatsForm from "./UpdateStatsForm";
+import Table from 'react-bootstrap/Table';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const TeamDetails = ({gameCreated, setGameCreated, teamRoster, setTeamRoster}) => {
+const TeamDetails = ({statsUpdated, setStatsUpdated, gameCreated, setGameCreated, teamRoster, setTeamRoster}) => {
 
 const {id} = useParams()
-
-const navigate = useNavigate()
 
 const [userTeams, setUserTeams] = useState([])
 const [teamGames, setTeamGames] = useState([])
@@ -18,7 +21,6 @@ const [teamSport, setTeamSport] = useState([])
 const [keys, setKeys] = useState([])
 const [isAdmin, setIsAdmin] = useState([])
 const [attendanceClick, setAttendanceClick] = useState(false)
-const [statsUpdated, setStatsUpdated] = useState(false)
 const [gameScore, setGameScore] = useState({
     points_for: 0,
     points_against: 0
@@ -108,14 +110,27 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         if(game['past?'] === false){
         return (
         <div key={uuidv4()}>
-        <h4 key={uuidv4()}>{game.formatted_date}</h4>
+        {/* <h4 key={uuidv4()}>{game.formatted_date}</h4>
         <h4 key={uuidv4()}>{game.opponent}</h4>
         <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
         <h4 key={uuidv4()}>{game.location}</h4>
         <h3 key={uuidv4()}>{game.points_for} - {game.points_against}</h3>
         <button key={uuidv4()} value={true} onClick={(e) => handleClick(e, game.id)}>In</button>
         <button key={uuidv4()} value={false} onClick={(e) => handleClick(e, game.id)}>Out</button>
-        {attendance(game.attendings)}
+        {attendance(game.attendings)} */}
+        <Card style={{ width: '50rem', margin: '7rem' }}>
+        <Card.Body>
+            <Card.Title>{game.formatted_date}</Card.Title>
+            <Button variant="outline-success" size="sm" key={uuidv4()} value={true} onClick={(e) => handleClick(e, game.id)}>In</Button>
+            <Button variant="outline-danger" size="sm" key={uuidv4()} value={false} onClick={(e) => handleClick(e, game.id)}>Out</Button>
+        </Card.Body>
+        <ListGroup className="list-group-flush">
+            <ListGroup.Item>{game.opponent}</ListGroup.Item>
+            <ListGroup.Item>{game.home ? '@Home' : `@${game.opponent}`}</ListGroup.Item>
+            <ListGroup.Item>{game.location}</ListGroup.Item>
+            <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
+        </ListGroup>
+        </Card>
         </div>
         )
         }
@@ -168,12 +183,11 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         })
 
     }
-
     const pastGames = teamGames.map((game, i) => {
         if(game['past?']){
             return (
-                <div key={uuidv4()} style={{backgroundColor: 'grey'}}>
-                <h4 key={uuidv4()}>{game.datetime}</h4>
+                <div key={uuidv4()}>
+                {/* <h4 key={uuidv4()}>{game.datetime}</h4>
                 <h4 key={uuidv4()}>{game.opponent}</h4>
                 <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
                 <h4 key={uuidv4()}>{game.location}</h4>
@@ -181,11 +195,50 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 {isAdmin ? <form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
                     <label key={uuidv4()}>points for</label><input key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/> - <label key={uuidv4()}>points against</label><input key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> <input key={uuidv4()} type='submit'/>
                 </form> : null}
-                {isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
+                {isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null} */}
+                
+                <Card style={{ width: '50rem', margin: '7rem', backgroundColor: 'grey' }}>
+                <Card.Body>
+                    <Card.Title>{game.formatted_date}</Card.Title>
+                </Card.Body>
+                <Card.Body>
+                    <Card.Title>Result: {game.points_for} - {game.points_against}</Card.Title>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                    <ListGroup.Item>{game.opponent}</ListGroup.Item>
+                    <ListGroup.Item>{game.home ? '@Home' : `@${game.opponent}`}</ListGroup.Item>
+                    <ListGroup.Item>{game.location}</ListGroup.Item>
+                    <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
+                    {isAdmin ? <ListGroup.Item>
+                    {isAdmin ? 
+                    <Form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
+                    <h5>Update Results</h5>
+                    <Form.Group>
+                    <Form.Label key={uuidv4()}>points for</Form.Label>
+                    <Form.Control key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/>
+                    </Form.Group>
+                    - 
+                    <Form.Group>
+                    <Form.Label key={uuidv4()}>points against</Form.Label>
+                    <Form.Control key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> 
+                    </Form.Group>
+                    <Button variant="light" type="submit">Submit</Button>
+                    </Form> : null}
+                    </ListGroup.Item> :
+                    null
+                    }
+                    {isAdmin ? <ListGroup.Item>{isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
+                    </ListGroup.Item>
+                    :
+                    null
+                    }
+                </ListGroup>
+                </Card>
                 </div>
             )
         }
     })
+
 
     const roster = teamRoster.map((member) => {
         return <li key={uuidv4()}>{member.name}</li>
@@ -218,17 +271,17 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     return (
         <div>
-            <button onClick={() => navigate('/teams')}>Back</button>
-            <div>
-                <img src={userTeams.logo} style={{height: '50px'}}/>
+            <div className="team-details-header">
+            {/* <button onClick={() => navigate('/teams')} id='team-back-button'>Back</button> */}
+                {/* <img src={userTeams.logo} style={{height: '50px'}}/> */}
                 <h1>{userTeams.name}</h1>
-                <h4>{userTeams.league}</h4>
-                <h4>{userTeams.season}</h4>
                 <h4>{userTeams.description}</h4>
-                {isAdmin? <h4>Join Code: {userTeams.uid}</h4> : null}
+                <h4>Season: {userTeams.season}</h4>
+                <h4>League: {userTeams.league}</h4>
                 <h4>Record: {userTeams.wins} - {userTeams.loses} - {userTeams.ties}</h4>
+                {isAdmin? <p>Join Code: {userTeams.uid}</p> : null}
             </div>
-            <div>
+            <div style={{padding: '1%'}}>
                 {isAdmin ? <NewGameForm setGameCreated={setGameCreated}/> : null}
             </div>
             <div>
@@ -247,14 +300,14 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
             </div>
             <div>
                 <h2>Stats</h2>
-                <table>
+                <Table striped bordered hover variant="dark">
                     <thead>
                     <tr>
                         {statsHeaders}       
                     </tr>
                     </thead>
                     {statData}
-                </table>
+                </Table>
             </div>
         </div>
     )

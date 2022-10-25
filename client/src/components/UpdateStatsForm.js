@@ -100,13 +100,14 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
     }
     
     const statInputs = Object.keys(keys).map((stat) => {
-        if(stat !== 'id' && stat !== 'name')
+        if(stat !== 'id' && stat !== 'name'){
         return (
             <div key={uuidv4()}>
                 <label key={uuidv4()}>{stat.split('_').join(' ')}</label>
-                <input onChange={handleChange} value={sportForm()[stat]} name={stat} placeholder={stat.split('_').join(' ')} type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
+                <input onChange={handleChange} value={sportForm()[stat]} name={stat}  type='number' key={uuidv4()} min={stat === 'plus_minus' ? null : 0} max={stat === 'games_played' ? 1 : null} />
             </div>
         )
+        }
     })
     
     const playerDropdown = playerStats.map((player) => {
@@ -117,7 +118,7 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         
         return (
             <>
-        <h1>Update stats</h1>
+        <h5>Update stats</h5>
         <form onSubmit={handleSubmit}>
             <select value={sportForm().id} name="id" onChange={handleChange}>
                 <option>Select a Player</option>

@@ -1,5 +1,5 @@
 import '../App.css';
-import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Teams from './Teams';
 import TeamDetails from './TeamDetails';
 import { useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ import SignUp from './SignUp';
 
 function App() {
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userData, setUserData] = useState([])
@@ -24,6 +24,7 @@ function App() {
   const [newTeamSubmitted, setNewTeamSubmitted] = useState(false)
   const [teamJoined, setTeamJoined] = useState(false)
   const [gameCreated, setGameCreated] = useState(false)
+  const [statsUpdated, setStatsUpdated] = useState(false)
   const [teamRoster, setTeamRoster] = useState([])
   const [loginData, setLoginData] = useState({username: '', password: ''})
   const [signupData, setSignupData] = useState({
@@ -51,7 +52,7 @@ useEffect(() => {
               setIsLoggedIn(true)
             })
         }
-    }, [isLoggedIn, newTeamSubmitted, teamJoined])
+    }, [isLoggedIn, newTeamSubmitted, teamJoined, statsUpdated])
   
 
   return (
@@ -63,9 +64,9 @@ useEffect(() => {
       <Route path='signup' element={<SignUp setUserData={setUserData} setIsLoggedIn={setIsLoggedIn} signupData={signupData} setSignupData={setSignupData}/>} />
       <Route path='/teams' element={<Teams isLoggedIn={isLoggedIn} userTeams={userTeams}/>} />
       <Route path='teams/team' element={<Team/>}>
-        <Route path=':id' element={<TeamDetails teamRoster={teamRoster} setTeamRoster={setTeamRoster} userData={userData} gameCreated={gameCreated} setGameCreated={setGameCreated}/>} />
+        <Route path=':id' element={<TeamDetails statsUpdated={statsUpdated} setStatsUpdated={setStatsUpdated} teamRoster={teamRoster} setTeamRoster={setTeamRoster} userData={userData} gameCreated={gameCreated} setGameCreated={setGameCreated}/>} />
       </Route>
-      <Route path='my-profile' element= {<MyProfile isLoggedIn={isLoggedIn} userData={userData} userBasketballStats={userBasketballStats} userBaseballStats={userBaseballStats} userHockeyStats={userHockeyStats}/>}/> 
+      <Route path='/my-profile' element= {<MyProfile statsUpdated={statsUpdated} isLoggedIn={isLoggedIn} userData={userData} userBasketballStats={userBasketballStats} userBaseballStats={userBaseballStats} userHockeyStats={userHockeyStats}/>}/> 
       <Route path='create-new-team' element={<NewTeamForm setTeamJoined={setTeamJoined} setNewTeamSubmitted={setNewTeamSubmitted} isLoggedIn={isLoggedIn}/>} />
     </Routes>
     </div>

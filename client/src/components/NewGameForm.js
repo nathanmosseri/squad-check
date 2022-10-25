@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NewGameForm = ({setGameCreated}) => {
 
@@ -10,7 +13,7 @@ const NewGameForm = ({setGameCreated}) => {
         opponent: "",
         datetime: "",
         location: "",
-        home: false,
+        home: undefined,
         points_for: 0,
         points_against: 0
     })
@@ -38,6 +41,15 @@ const NewGameForm = ({setGameCreated}) => {
                 alert(data.errors)
             } else {
                 setGameCreated(prev => !prev)
+                setGameFormData({
+                    team_id: id,
+                    opponent: "",
+                    datetime: "",
+                    location: "",
+                    home: false,
+                    points_for: 0,
+                    points_against: 0
+                })
             }
         })
     }
@@ -45,20 +57,29 @@ const NewGameForm = ({setGameCreated}) => {
     return (
         <>
             <h3>Schedule a new game</h3>
-            <form onSubmit={handleSubmit}>
-                <label>Date and Time</label>
-                <input name="datetime" type='datetime-local' onChange={handleChange}/>
-                <select name="home" onChange={handleChange}>
-                    <option value={null}>Home or Away?</option>
-                    <option value={true}>Home</option>
-                    <option value={false}>Away</option>
-                </select>
-                <label>Location</label>
-                <input name="location" onChange={handleChange}/>
-                <label>opponent</label>
-                <input name="opponent" onChange={handleChange}/>
-                <input type='submit' />
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Date and Time</Form.Label>
+                    <Form.Control name="datetime" type='datetime-local' onChange={handleChange} value={gameFormData.datetime}/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Location</Form.Label>
+                    <Form.Control name="location" onChange={handleChange} value={gameFormData.location}/>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Home or Away?</Form.Label>
+                    <Form.Select name="home" onChange={handleChange} value={gameFormData.home}>
+                        <option value={undefined}>---</option>
+                        <option value={true}>Home</option>
+                        <option value={false}>Away</option>
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Opponent</Form.Label>
+                    <Form.Control name="opponent" onChange={handleChange} value={gameFormData.opponent}/>
+                </Form.Group>
+                <Button variant="light" type="submit">Submit</Button>
+            </Form>
         </>
     )
 }

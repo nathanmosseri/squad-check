@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
 
@@ -78,32 +81,52 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     return (
         <div>
             {isLoggedIn ? (
-            <div>
+            <div style={{padding: '1%'}}>
                 <h1>Create a New Team</h1>
-                <form onSubmit={handleSubmit}>
-                    <input placeholder="Team Name" name="name" onChange={handleChange}/>
-                    <select name="sport" onChange={handleChange}>
-                        <option>Select a Sport</option>
-                        <option>Hockey</option>
-                        <option>Baseball</option>
-                        <option>Basketball</option>
-                    </select>
-                    <select name="season" onChange={handleChange}>
-                        <option>Select the year your season will start</option>
-                        <option>{new Date().getFullYear()}</option>
-                        <option>{new Date().getFullYear() + 1}</option>
-                    </select>
-                    <input placeholder="League Name" name="league" onChange={handleChange}/>
-                    <input placeholder="Team Logo" name="logo" onChange={handleChange}/>
-                    <input placeholder="Team Description" name="description" onChange={handleChange}/>
-                    <input type='submit' />
-                </form>
+                <Form onSubmit={handleSubmit} >
+                    <Form.Group>
+                        <Form.Label>Team Name</Form.Label>
+                        <Form.Control value={newTeamFormData.name} placeholder="Team Name" name="name" onChange={handleChange}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Sport</Form.Label>
+                        <Form.Select value={newTeamFormData.sport} name="sport" onChange={handleChange}>
+                            <option>Select a Sport</option>
+                            <option>Hockey</option>
+                            <option>Baseball</option>
+                            <option>Basketball</option>
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Season</Form.Label>
+                        <Form.Select value={newTeamFormData.season} name="season" onChange={handleChange}>
+                            <option>Select the year your season will start</option>
+                            <option>{new Date().getFullYear()}</option>
+                            <option>{new Date().getFullYear() + 1}</option>
+                        </Form.Select>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>League</Form.Label>
+                        <Form.Control value={newTeamFormData.league} placeholder="League Name" name="league" onChange={handleChange}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Team Logo</Form.Label>
+                        <Form.Control value={newTeamFormData.logo} placeholder="Team Logo (URL)" name="logo" onChange={handleChange}/>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Team Description</Form.Label>
+                        <Form.Control value={newTeamFormData.description} placeholder="Team Description" name="description" onChange={handleChange}/>
+                    </Form.Group>  
+                    <Button type='submit'>Create</Button>
+                </Form>
                 <h1>Join an Existing Team</h1>
-                <form onSubmit={handleJoinSubmit}>
-                    <label>Enter the Id of the team you'd like to join</label>
-                    <input name='uid' onChange={handleJoinChange}/>
-                    <input type='submit'/>
-                </form>
+                <Form onSubmit={handleJoinSubmit}>
+                    <Form.Group>
+                        <Form.Label>Enter the "Join Code" of the team you'd like to join</Form.Label>
+                        <Form.Control value={joinTeamCode.uid} name='uid' onChange={handleJoinChange}/>
+                    </Form.Group>
+                    <Button type="submit">Join</Button>
+                </Form>
             </div>
             
             )
