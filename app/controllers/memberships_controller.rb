@@ -13,6 +13,10 @@ class MembershipsController < ApplicationController
         user = User.find(user_id[0]["user_id"])
         team = Team.find_by!(uid: params[:uid])
         member = Membership.create!(user_id: user.id, team_id: team.id, admin: false)
+        games = Game.where(team_id: team.id)
+        attendings = games.each do |game|
+            Attending.create!(game_id: game.id, user_id: user.id, attending: nil)
+        end
         if team.sport == 'Hockey'
             HockeyStat.create!(user_id: user.id, team_id: team.id, games_played: 0, goals: 0, assists: 0, penalty_minutes: 0, plus_minus: 0, saves: 0, goals_allowed: 0, save_precentage: 0)
         elsif team.sport == 'Baseball'

@@ -226,13 +226,13 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     <Form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
                     <h5>Update Results</h5>
                     <Form.Group>
-                    <Form.Label key={uuidv4()}>points for</Form.Label>
-                    <Form.Control key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/>
+                        <Form.Label key={uuidv4()}>points for</Form.Label>
+                        <Form.Control key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/>
                     </Form.Group>
                     - 
                     <Form.Group>
-                    <Form.Control key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> 
-                    <Form.Label key={uuidv4()}>points against</Form.Label>
+                        <Form.Control key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> 
+                        <Form.Label key={uuidv4()}>points against</Form.Label>
                     </Form.Group>
                     <Button variant="light" type="submit">Submit</Button>
                     </Form> : null}
