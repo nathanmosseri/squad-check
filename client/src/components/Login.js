@@ -42,7 +42,7 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, s
 
 
     return (
-        <div>
+        <div style={{margin: '2%'}}>
         <h1>Log In</h1>
         <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicUsername">

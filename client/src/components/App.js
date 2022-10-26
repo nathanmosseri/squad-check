@@ -40,10 +40,11 @@ useEffect(() => {
         if(token && !userData.username){
             fetch('http://localhost:3000/me', {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                  'Authorization': `Bearer ${token}`
                 }
             }).then(res => res.json())
             .then((data) => {
+              console.log(data)
               setUserData(data)
               setUserTeams(data.teams)
               setUserHockeyStats(data.hockey_stats)

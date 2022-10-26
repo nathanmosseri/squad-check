@@ -44,19 +44,8 @@ const SignUp = ({setUserData, setIsLoggedIn, signupData, setSignupData}) => {
     }
 
     return (
-        // <div>
-        // <h1>Sign Up</h1>
-        // <form onSubmit={handleSubmit}>
-        //     <input value={signupData.name} name="name" placeholder="name" onChange={handleChange}/>
-        //     <input value={signupData.username} name='username' placeholder="username" onChange={handleChange}/>
-        //     <input value={signupData.password} name="password" type='password' placeholder="password" onChange={handleChange}/>
-        //     <input value={signupData.email} name="email" placeholder="email" onChange={handleChange}/>
-        //     <input value={signupData.phone_number} name="phone_number" placeholder="phone number" onChange={handleChange}/>
-        //     <input type='submit' />
-        // </form>
-        // <p>Have an account <Link to='/login'>Log In</Link></p>
-        // </div>
-        <div>
+        <div style={{margin: '2%'}}>
+            <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username</Form.Label>

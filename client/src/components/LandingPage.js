@@ -2,23 +2,64 @@ import React from "react";
 
 const LandingPage = () => {
     return (
-        <div>
-            <h1>Squad-Check</h1>
-            <p>Squad-Check is the only tool you'll need to keep track of your squads schedule,
+        <div style={{padding: '2%',backgroundColor: 'grey'}}>
+            <div>
+            <h1 style={{textAlign: 'center'}}>Squad-Check</h1>
+            <p style={{textAlign: 'center'}}>The only tool you'll need to keep track of your squad's schedule,
                 availability, and stats.
             </p>
-            <p>Squad-Check is not just a game schedule, the site allows your teammates to 
-                RSVP whether they're coming to the game or not so you don't have to contact everyone to 
-                make sure they're coming.
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style={{marginLeft: '15%'}}>
+            <h1>Scheduling</h1>
+            <p>Squad-Check allows the team admin to input their upcoming games with
+                information such as: 
             </p>
-            <p>We also keep track of your teams stats for Hockey, Baseball, and Basketball.
-                Once your game has passed, the team admin can update the stat lines for each player and 
-                the result of your game which in turn will update your team's record.
+                <ul>
+                    <li>Date and time</li>
+                    <li>Opponent</li>
+                    <li>Home or away game</li>
+                    <li>Location of your game</li>
+                </ul>
+            <br/>
+            <br/>
+            <br/>
+            <h1>Availability</h1>
+            <p>Squad-Check allows your teammates to check in or out for an upcoming game so that your
+                team has no surprises come game-time.
             </p>
-            <p>Play for multiple teams in multiple sports? We keep track of all your stats across
-                every team, season, and sport you've played. As you create and join teams new stat lines 
-                will be added to your profile page and updated as your seasons progress.
+            <p>No more Chasing after your teammates to find out if they can play or not!</p>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <h1>Stats</h1>
+            <p>When you create and join teams, new stat lines are generated for each team that will be
+            updated by the team admin after each game.
             </p>
+            <p>Your personal stats will also be updated and added to your profile page where you can see
+            all of you total stats for each season and team across all supported sports
+            </p>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>            
+            </div>
         </div>
     )
 }

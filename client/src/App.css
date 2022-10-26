@@ -3,9 +3,21 @@
   text-align: center ;
   background-color: rgb(35, 34, 34);
   color: white;
+  
 }
 
 Link {
   text-decoration: none;
 }
+
+.teams-page-div {
+  background-color: rgb(47, 45, 45);
+  padding: 1%;
+}
+
+.team-details-body {
+  padding: 1%;
+  background-color: rgb(80, 77, 77);
+}
+
 

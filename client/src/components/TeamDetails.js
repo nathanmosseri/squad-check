@@ -200,16 +200,6 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         if(game['past?']){
             return (
                 <div key={uuidv4()}>
-                {/* <h4 key={uuidv4()}>{game.datetime}</h4>
-                <h4 key={uuidv4()}>{game.opponent}</h4>
-                <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
-                <h4 key={uuidv4()}>{game.location}</h4>
-                <h3 key={uuidv4()}>{game.points_for} - {game.points_against}</h3>
-                {isAdmin ? <form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
-                    <label key={uuidv4()}>points for</label><input key={uuidv4()} value={gameScore.points_for} name="points_for" min={0} type='number' onChange={handleScoreChange}/> - <label key={uuidv4()}>points against</label><input key={uuidv4()} value={gameScore.points_against} name="points_against" min={0} type='number' onChange={handleScoreChange}/> <input key={uuidv4()} type='submit'/>
-                </form> : null}
-                {isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null} */}
-                
                 <Card style={{ width: '50rem', margin: '7rem', backgroundColor: 'grey' }}>
                 <Card.Body>
                     <Card.Title>{game.formatted_date}</Card.Title>
@@ -297,9 +287,8 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     return (
         <div>
-            <div className="team-details-header">
-            {/* <button onClick={() => navigate('/teams')} id='team-back-button'>Back</button> */}
-                {/* <img src={userTeams.logo} style={{height: '50px'}}/> */}
+            <div className="team-details-header" style={{backgroundImage: `${userTeams.logo}`}}>
+                <img style={{height: '18%', width: '18%', position: 'absolute', left: '1%', borderRadius: '5%'}} src={userTeams.logo} alt={`${userTeams.name} logo`}/>
                 <h1>{userTeams.name}</h1>
                 <h4>{userTeams.description}</h4>
                 <h4>Season: {userTeams.season}</h4>
@@ -307,10 +296,19 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 <h4>Record: {userTeams.wins} - {userTeams.loses} - {userTeams.ties}</h4>
                 {isAdmin? <p>Join Code: {userTeams.uid}</p> : null}
             </div>
-            <div style={{padding: '1%'}}>
+            <div className="team-details-body">
+            <div>
                 {isAdmin ? <NewGameForm setGameCreated={setGameCreated}/> : null}
             </div>
-            <div>
+            <div style={{float: "right", padding: '5%', width: '20%', height: '50%'}}>
+                <Card style={{fontSize: '111%'}}>
+                    <ul>
+                        <Card.Title>Roster</Card.Title>
+                        {roster}
+                    </ul>
+                </Card>
+            </div>
+            <div style={{padding: '1%'}}>
                 <h2>Upcoming Games:</h2>
                 {upcomingGames}
             </div>
@@ -318,12 +316,12 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 <h2>Past Games:</h2>
                 {pastGames}
             </div>
-            <div>
+            {/* <div>
                 <ul>
                     <h2>Roster</h2>
                     {roster}
                 </ul>
-            </div>
+            </div> */}
             <div>
                 <h2>Stats</h2>
                 <Table striped bordered hover variant="dark">
@@ -334,6 +332,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     </thead>
                     {statData}
                 </Table>
+            </div>
             </div>
         </div>
     )
