@@ -42,15 +42,6 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, s
 
 
     return (
-        // <div>
-        //     <h1>Log In</h1>
-        //     <form onSubmit={handleSubmit}>
-        //         <input value={loginData.username} name="username" placeholder="username" onChange={handleChange}/>
-        //         <input value={loginData.password} name="password" placeholder="password" type='password' onChange={handleChange}/>
-        //         <input type='submit' />
-        //     </form>
-        //     <p>Not a memeber? <Link to='/signup'>Sign Up</Link></p>
-        // </div>
         <div>
         <h1>Log In</h1>
         <Form onSubmit={handleSubmit}>

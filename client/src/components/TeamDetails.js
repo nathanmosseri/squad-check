@@ -222,8 +222,8 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     <ListGroup.Item>{game.home ? '@Home' : `@${game.opponent}`}</ListGroup.Item>
                     <ListGroup.Item>{game.location}</ListGroup.Item>
                     <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
-                    {isAdmin ? <Accordion defaultActiveKey={['0']} alwaysOpen>
-                        <Accordion.Item eventKey="0">
+                    {isAdmin ? <Accordion defaultActiveKey={['0']} alwaysOpen >
+                        <Accordion.Item eventKey="0" style={{backgroundColor: 'grey'}}>
                             <Accordion.Header>Update Results</Accordion.Header>
                             <Accordion.Body>
                                 <ListGroup.Item>

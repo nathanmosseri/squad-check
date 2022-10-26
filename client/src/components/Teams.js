@@ -21,9 +21,10 @@ const Teams = ({userTeams, isLoggedIn}) => {
         //     </Link>
         // </div>
         <Link to={`team/${team.id}`} key={uuidv4()}>
-        <Card key={uuidv4()} style={{width: '80rem', margin: '2%'}}>
-        <Card.Img variant="top" src={team.logo} style={{height: '200px'}} key={uuidv4()}/>
+        <Card key={uuidv4()} style={{width: '50%', margin: '2%', justifyContent: 'center'}}>
+        {/* <Card.Img variant="top" src={team.logo} style={{height: '200px'}} key={uuidv4()}/> */}
         <Card.Body key={uuidv4()}>
+            <Card.Img src={team.logo} key={uuidv4()} style={{height: '12%', width: '12%', float: 'right'}} />
             <Card.Title key={uuidv4()}>{team.name}</Card.Title>
             <Card.Text key={uuidv4()}>{team.description}</Card.Text>
         </Card.Body>

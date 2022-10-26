@@ -18,6 +18,4 @@ class Game < ApplicationRecord
         self.datetime.strftime('%A, %B %d, %Y %I:%M%P')
     end
 
-# Williams Marquardt
-
 end
