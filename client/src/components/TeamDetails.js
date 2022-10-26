@@ -8,6 +8,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const TeamDetails = ({statsUpdated, setStatsUpdated, gameCreated, setGameCreated, teamRoster, setTeamRoster}) => {
@@ -221,7 +222,11 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     <ListGroup.Item>{game.home ? '@Home' : `@${game.opponent}`}</ListGroup.Item>
                     <ListGroup.Item>{game.location}</ListGroup.Item>
                     <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
-                    {isAdmin ? <ListGroup.Item>
+                    {isAdmin ? <Accordion defaultActiveKey={['0']} alwaysOpen>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Update Results</Accordion.Header>
+                            <Accordion.Body>
+                                <ListGroup.Item>
                     {isAdmin ? 
                     <Form key={uuidv4()} onSubmit={(e) => handleScoreSubmit(e, game.id)}>
                     <h5>Update Results</h5>
@@ -236,11 +241,20 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     </Form.Group>
                     <Button variant="light" type="submit">Submit</Button>
                     </Form> : null}
-                    </ListGroup.Item> :
+                    </ListGroup.Item>
+                    </Accordion.Body>
+                    </Accordion.Item>
+                    </Accordion> :
                     null
                     }
-                    {isAdmin ? <ListGroup.Item>{isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
+                    {isAdmin ? 
+                    <Accordion>
+                        <Accordion.Header>Update Stats</Accordion.Header>
+                        <Accordion.Body>
+                    <ListGroup.Item>{isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
                     </ListGroup.Item>
+                    </Accordion.Body>
+                    </Accordion>
                     :
                     null
                     }
