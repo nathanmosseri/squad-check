@@ -44,7 +44,6 @@ useEffect(() => {
                 }
             }).then(res => res.json())
             .then((data) => {
-              console.log(data)
               setUserData(data)
               setUserTeams(data.teams)
               setUserHockeyStats(data.hockey_stats)
