@@ -71,7 +71,7 @@ const MyProfile = ({ userData, userHockeyStats, userBasketballStats, userBasebal
             <h1>{userData.name}</h1>
             {userHockeyStats.length > 0 ? <h2>Hockey Stats</h2>: null}
             {userHockeyStats.length > 0 ?
-            <Table striped bordered hover variant="dark" size="sm">
+            <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
                         <th>Season</th>
