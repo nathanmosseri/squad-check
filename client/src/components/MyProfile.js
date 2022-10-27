@@ -67,7 +67,7 @@ const MyProfile = ({ userData, userHockeyStats, userBasketballStats, userBasebal
     })
 
     return (
-        <div style={{backgroundColor: 'rgb(80, 77, 77)'}}>
+        <div style={{backgroundColor: 'rgb(80, 77, 77)', height: '100vh'}}>
             <h1>{userData.name}</h1>
             {userHockeyStats.length > 0 ? <h2>Hockey Stats</h2>: null}
             {userHockeyStats.length > 0 ?

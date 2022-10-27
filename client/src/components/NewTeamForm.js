@@ -79,7 +79,7 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     }
 
     return (
-        <div style={{backgroundColor: 'rgb(80, 77, 77)'}}>
+        <div style={{backgroundColor: 'rgb(80, 77, 77)', height: '100vh'}}>
             {isLoggedIn ? (
             <div style={{padding: '1%'}}>
                 <h1>Create a New Team</h1>

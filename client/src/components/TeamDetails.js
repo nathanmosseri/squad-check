@@ -294,7 +294,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
             </div>
             <div style={{float: "right", padding: '5%', width: '20%', height: '50%'}}>
                 <Card style={{fontSize: '111%'}}>
-                    <ul>
+                    <ul className="roster">
                         <Card.Title>Roster</Card.Title>
                         {roster}
                     </ul>

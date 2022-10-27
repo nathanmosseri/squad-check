@@ -13,6 +13,7 @@ Link {
 .teams-page-div {
   background-color: rgb(47, 45, 45);
   padding: 1%;
+  height: 100vh;
 }
 
 .team-details-body {
@@ -20,4 +21,48 @@ Link {
   background-color: rgb(80, 77, 77);
 }
 
+.roster {
+  padding-top: 10%;
+  padding-left: 22%;
+}
 
+.navbar-headers{
+  padding-left: 5%;
+  width: 15vw;
+}
+
+.navbar-headers-teams {
+  padding-left: 30%;
+  width: 15vw;
+}
+
+.whole-landing-page-wrapper{
+  display: flex;
+  margin-top: 5%;
+}
+
+.first-div-landing-page{
+  margin-right: 15%;
+  width: 30vw;
+}
+
+.stats-div{
+  width: 30vw;
+  background-color: white;
+  border-radius: 20%;
+  padding: 5%;
+}
+
+.squad-check-top {
+  background-image: url("../public/images/hockey.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: .7;
+  color: black;
+  padding-top: 3%;
+  height: 15vh;
+}
+
+.landing-page{
+  padding-top: 0;
+}

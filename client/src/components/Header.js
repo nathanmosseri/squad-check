@@ -18,13 +18,13 @@ const Header = ({setIsLoggedIn, isLoggedIn}) => {
     return (
         <div>
         <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="/">Squad-Check</Navbar.Brand>
+        <Container >
+          <Navbar.Brand href="/" className="navbar-headers">Squad-Check</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/teams">My Teams</Nav.Link>
-            <Nav.Link href="/create-new-team">Create or Join a Team</Nav.Link>
-            <Nav.Link href="/my-profile">My Profile</Nav.Link>
-            {isLoggedIn ? <Nav.Link onClick={logout}>logout</Nav.Link> : <Nav.Link href='login'>Log In</Nav.Link>}
+            <Nav.Link href="/teams" ><div className="navbar-headers-teams">My Teams</div></Nav.Link>
+            <Nav.Link href="/create-new-team" ><div className="navbar-headers">Create or Join a Team</div></Nav.Link>
+            <Nav.Link href="/my-profile"><div className="navbar-headers">My Profile</div></Nav.Link>
+            {isLoggedIn ? <Nav.Link onClick={logout} ><div className="navbar-headers">logout</div></Nav.Link> : <Nav.Link href='login'>Log In</Nav.Link>}
           </Nav>
         </Container>
       </Navbar>
