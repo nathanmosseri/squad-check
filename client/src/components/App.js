@@ -13,8 +13,6 @@ import SignUp from './SignUp';
 
 function App() {
 
-  // const navigate = useNavigate()
-
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userData, setUserData] = useState([])
   const [userTeams, setUserTeams] = useState([])

@@ -122,14 +122,6 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         if(game['past?'] === false){
         return (
         <div key={uuidv4()}>
-        {/* <h4 key={uuidv4()}>{game.formatted_date}</h4>
-        <h4 key={uuidv4()}>{game.opponent}</h4>
-        <h4 key={game.id}>{game.home ? '@Home' : `@${game.opponent}`}</h4>
-        <h4 key={uuidv4()}>{game.location}</h4>
-        <h3 key={uuidv4()}>{game.points_for} - {game.points_against}</h3>
-        <button key={uuidv4()} value={true} onClick={(e) => handleClick(e, game.id)}>In</button>
-        <button key={uuidv4()} value={false} onClick={(e) => handleClick(e, game.id)}>Out</button>
-        {attendance(game.attendings)} */}
         <Card style={{ width: '50rem', margin: '7rem' }}>
         <Card.Body>
             <Card.Title>{game.formatted_date}</Card.Title>
@@ -316,12 +308,6 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                 <h2>Past Games:</h2>
                 {pastGames}
             </div>
-            {/* <div>
-                <ul>
-                    <h2>Roster</h2>
-                    {roster}
-                </ul>
-            </div> */}
             <div>
                 <h2>Stats</h2>
                 <Table striped bordered hover variant="dark">
