@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "attendings", force: :cascade do |t|
     t.integer "game_id"
     t.integer "user_id"
     t.boolean "attending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.text "name"
   end
 
   create_table "baseball_stats", force: :cascade do |t|
@@ -60,14 +63,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
 
   create_table "games", force: :cascade do |t|
     t.integer "team_id"
-    t.string "opponent"
+    t.text "opponent"
     t.datetime "datetime"
-    t.string "location"
+    t.text "location"
     t.boolean "home"
-    t.string "result"
+    t.text "result"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.integer "points_against"
     t.integer "points_for"
   end
@@ -96,10 +98,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "name"
-    t.string "logo"
-    t.string "league"
-    t.string "description"
+    t.text "name"
+    t.text "logo"
+    t.text "league"
+    t.text "description"
     t.integer "wins"
     t.integer "loses"
     t.integer "ties"
@@ -107,16 +109,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "season"
-    t.string "sport"
-    t.string "uid"
+    t.text "sport"
+    t.text "uid"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "username"
-    t.string "password_digest"
-    t.string "email"
-    t.string "phone_number"
+    t.text "name"
+    t.text "username"
+    t.text "password_digest"
+    t.text "email"
+    t.text "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
