@@ -186,13 +186,104 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         .then((data) => {
             
         })
-
     }
+
+    const statsHeaders = Object.keys(keys).map((key, i) => {
+        if(key !== 'id'){
+        return (
+        <th key={uuidv4()}>{key.split('_').join(' ')}</th>
+        )
+        }
+    })
+
+    const statData = playerStats.map((stat) => {
+        const tableData = Object.keys(stat).map((value, i) => {
+            if(value !== 'id'){
+            return (
+                <td key={uuidv4()}>{stat[value]}</td>
+            )
+            }
+        })
+        return (
+            <tbody key={uuidv4()}>
+                <tr key={uuidv4()}>
+                    {tableData}
+                </tr>
+            </tbody>
+        )
+    })
+
+    const gameStats = (stats) => {
+        return stats.map((stat) => {
+            if(teamSport === 'Hockey'){
+            return (
+                <tbody key={uuidv4()}>
+                    <tr key={uuidv4()}>
+                        <td key={uuidv4()}>{stat.name}</td>
+                        <td key={uuidv4()}>{stat.games_played}</td>
+                        <td key={uuidv4()}>{stat.goals}</td>
+                        <td key={uuidv4()}>{stat.assists}</td>
+                        <td key={uuidv4()}>{stat.penalty_minutes}</td>
+                        <td key={uuidv4()}>{stat.plus_minus}</td>
+                        <td key={uuidv4()}>{stat.saves}</td>
+                        <td key={uuidv4()}>{stat.goals_allowed}</td>
+                    </tr>
+                </tbody>
+            )
+            } else if(teamSport === 'Baseball'){
+                return (
+                    <tbody key={uuidv4()}>
+                        <tr key={uuidv4()}>
+                            <td key={uuidv4()}>{stat.name}</td>
+                            <td key={uuidv4()}>{stat.games_played}</td>
+                            <td key={uuidv4()}>{stat.at_bats}</td>
+                            <td key={uuidv4()}>{stat.runs_batted_in}</td>
+                            <td key={uuidv4()}>{stat.home_runs}</td>
+                            <td key={uuidv4()}>{stat.hits}</td>
+                            <td key={uuidv4()}>{stat.batter_strikeouts}</td>
+                            <td key={uuidv4()}>{stat.batter_walks}</td>
+                            <td key={uuidv4()}>{stat.stolen_bases}</td>
+                            <td key={uuidv4()}>{stat.innings_pitched}</td>
+                            <td key={uuidv4()}>{stat.hits_allowed}</td>
+                            <td key={uuidv4()}>{stat.runs_allowed}</td>
+                            <td key={uuidv4()}>{stat.pitcher_strikeouts}</td>
+                            <td key={uuidv4()}>{stat.pitcher_walks}</td>
+                        </tr>
+                    </tbody>
+                )
+            } else if(teamSport === 'Basketball'){
+                return (
+                    <tbody key={uuidv4()}>
+                        <tr key={uuidv4()}>
+                            <td key={uuidv4()}>{stat.name}</td>
+                            <td key={uuidv4()}>{stat.games_played}</td>
+                            <td key={uuidv4()}>{stat.points}</td>
+                            <td key={uuidv4()}>{stat.assists}</td>
+                            <td key={uuidv4()}>{stat.blocks}</td>
+                            <td key={uuidv4()}>{stat.rebounds}</td>
+                            <td key={uuidv4()}>{stat.steals}</td>
+                            <td key={uuidv4()}>{stat.three_pointers_hit}</td>
+                            <td key={uuidv4()}>{stat.three_pointers_attempted}</td>
+                        </tr>
+                    </tbody>
+                )
+            }
+        })
+    }
+
     const pastGames = teamGames.map((game, i) => {
+        let sport;
+        if(teamSport === 'Hockey'){
+            sport = game.game_hockey_stats
+        } else if(teamSport === 'Baseball'){
+            sport = game.game_baseball_stats
+        } else if(teamSport === 'Basketball'){
+            sport = game.game_basketball_stats
+        }
         if(game['past?']){
             return (
                 <div key={uuidv4()}>
-                <Card style={{ width: '50rem', margin: '7rem', backgroundColor: 'grey' }}>
+                <Card style={{ width: teamSport === "Baseball" ? '60rem' : '50rem', margin: '7rem', backgroundColor: 'grey' }}>
                 <Card.Body>
                     <Card.Title>{game.formatted_date}</Card.Title>
                 </Card.Body>
@@ -204,6 +295,21 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     <ListGroup.Item>{game.home ? '@Home' : `@${game.opponent}`}</ListGroup.Item>
                     <ListGroup.Item>{game.location}</ListGroup.Item>
                     <ListGroup.Item>{attendance(game.attendings)}</ListGroup.Item>
+                    <Accordion>
+                        <Accordion.Item>
+                            <Accordion.Header>Game Stats</Accordion.Header>
+                            <Accordion.Body>
+                                    <Table striped bordered hover variant="dark" size={teamSport === 'Baseball' ? 'sm' : 'lg'}>
+                                        <thead>
+                                            <tr>
+                                            {statsHeaders}
+                                            </tr>
+                                        </thead>
+                                        {gameStats(sport)}
+                                    </Table>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
                     {isAdmin ? <Accordion defaultActiveKey={['0']} alwaysOpen >
                         <Accordion.Item eventKey="0" style={{backgroundColor: 'grey'}}>
                             <Accordion.Header>Update Results</Accordion.Header>
@@ -233,7 +339,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
                     <Accordion>
                         <Accordion.Header>Update Stats</Accordion.Header>
                         <Accordion.Body>
-                    <ListGroup.Item>{isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys}/> : null}
+                    <ListGroup.Item>{isAdmin ? <UpdateStatsForm key={uuidv4()} setStatsUpdated={setStatsUpdated} teamSport={teamSport} playerStats={playerStats} keys={keys} sport={sport}/> : null}
                     </ListGroup.Item>
                     </Accordion.Body>
                     </Accordion>
@@ -250,31 +356,6 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     const roster = teamRoster.map((member) => {
         return <li key={uuidv4()}>{member.name}</li>
-    })
-    
-    const statsHeaders = Object.keys(keys).map((key, i) => {
-        if(key !== 'id'){
-        return (
-        <th key={uuidv4()}>{key.split('_').join(' ')}</th>
-        )
-        }
-    })
-
-    const statData = playerStats.map((stat) => {
-        const tableData = Object.keys(stat).map((value, i) => {
-            if(value !== 'id'){
-            return (
-                <td key={uuidv4()}>{stat[value]}</td>
-            )
-            }
-        })
-        return (
-            <tbody key={uuidv4()}>
-                <tr key={uuidv4()}>
-                    {tableData}
-                </tr>
-            </tbody>
-        )
     })
 
     return (

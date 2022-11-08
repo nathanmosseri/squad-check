@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :game_basketball_stats
+  resources :game_baseball_stats
+  resources :game_hockey_stats
   # resources :attendings
   resources :games
   resources :baseball_stats

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_07_210737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,62 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_200353) do
     t.float "three_pointer_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "game_baseball_stats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "games_played"
+    t.integer "at_bats"
+    t.integer "hits"
+    t.float "batting_average"
+    t.integer "batter_strikeouts"
+    t.integer "batter_walks"
+    t.integer "runs_batted_in"
+    t.integer "home_runs"
+    t.integer "stolen_bases"
+    t.integer "pitcher_strikeouts"
+    t.float "innings_pitched"
+    t.integer "hits_allowed"
+    t.integer "runs_allowed"
+    t.float "earned_run_average"
+    t.integer "pitcher_walks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "game_basketball_stats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "games_played"
+    t.integer "points"
+    t.integer "assists"
+    t.integer "blocks"
+    t.integer "rebounds"
+    t.integer "steals"
+    t.integer "three_pointers_hit"
+    t.integer "three_pointers_attempted"
+    t.float "three_pointer_percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
+  create_table "game_hockey_stats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.integer "games_played"
+    t.integer "goals"
+    t.integer "assists"
+    t.integer "penalty_minutes"
+    t.integer "plus_minus"
+    t.integer "saves"
+    t.integer "goals_allowed"
+    t.float "save_precentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "games", force: :cascade do |t|

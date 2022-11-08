@@ -3,6 +3,9 @@ class Game < ApplicationRecord
     belongs_to :team
     # belongs_to :user
     has_many :attendings, dependent: :destroy
+    has_many :game_baseball_stats, dependent: :destroy
+    has_many :game_hockey_stats, dependent: :destroy
+    has_many :game_basketball_stats, dependent: :destroy
 
     validates :datetime, presence: true
 

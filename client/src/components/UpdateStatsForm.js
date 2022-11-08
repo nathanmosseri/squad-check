@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
+const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport, sport}) => {
 
     const [basketballStatsFormData, setBasketballStatsFormData] = useState({
         id: undefined,
@@ -79,11 +79,11 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         let token = localStorage.getItem('token')
         let sport;
         if (teamSport === 'Hockey'){
-            sport = 'hockey_stats'
+            sport = 'game_hockey_stats'
         } else if(teamSport === 'Baseball'){
-            sport = 'baseball_stats'
+            sport = 'game_baseball_stats'
         } else if(teamSport === 'Basketball'){
-            sport = 'basketball_stats'
+            sport = 'game_basketball_stats'
         }
         fetch(`http://localhost:3000/${sport}/${sportForm().id}`, {
             method: 'PATCH',
@@ -113,11 +113,17 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport}) => {
         }
     })
     
-    const playerDropdown = playerStats.map((player) => {
+    // const playerDropdown = playerStats.map((player) => {
+    //     return (
+    //         <option value={player.id} key={uuidv4()} >{player.name}</option>
+    //         )
+    //     })
+
+    const playerDropdown = sport.map((player) => {
         return (
-            <option value={player.id} key={uuidv4()} >{player.name}</option>
-            )
-        })
+            <option value={player.id} key={uuidv4()}>{player.name}</option>
+        )
+    })
         
         return (
             <>
