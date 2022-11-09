@@ -31,7 +31,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     const getTeamDetails = () => {
         let token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/teams/${id}`, {
+        fetch(`http://localhost:3000/api/teams/${id}`, {
             headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -95,7 +95,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     const handleClick = (e, id) => {
         let token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/attendings/game/${id}`, {
+        fetch(`http://localhost:3000/api/attendings/game/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -110,7 +110,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
 
     const handleGameDelete = (e, id) => {
         let token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/games/${id}`, {
+        fetch(`http://localhost:3000/api/games/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -151,7 +151,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
     const handleScoreSubmit = (e, gameId) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch(`http://localhost:3000/games/${gameId}`, {
+        fetch(`http://localhost:3000/api/games/${gameId}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',
@@ -175,7 +175,7 @@ const [scoreUpdated, setScoreUpdated] = useState(false)
         } else if(gameScore.points_for === gameScore.points_against){
             recordObj = {ties: 1}
         }
-        fetch(`http://localhost:3000/teams/${id}`, {
+        fetch(`http://localhost:3000/api/teams/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

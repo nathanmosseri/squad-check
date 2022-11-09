@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.db91361c.css",
+    "main.js": "/static/js/main.68d6cae2.js",
+    "static/media/hockey.png": "/static/media/hockey.c1ebab3e48a85b4c5dda.png",
+    "index.html": "/index.html",
+    "main.db91361c.css.map": "/static/css/main.db91361c.css.map",
+    "main.68d6cae2.js.map": "/static/js/main.68d6cae2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.db91361c.css",
+    "static/js/main.68d6cae2.js"
+  ]
+}

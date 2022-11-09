@@ -17,7 +17,7 @@ const Login = ({setIsLoggedIn, loginData, setLoginData, userData, setUserData, s
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/login', {
+        fetch('http://localhost:3000/api/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

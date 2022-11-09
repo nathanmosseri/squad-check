@@ -32,7 +32,7 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch('http://localhost:3000/teams', {
+        fetch('http://localhost:3000/api/teams', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -60,7 +60,7 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     const handleJoinSubmit = (e) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch('http://localhost:3000/memberships', {
+        fetch('http://localhost:3000/api/memberships', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

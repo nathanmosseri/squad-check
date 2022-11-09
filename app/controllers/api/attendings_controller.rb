@@ -1,4 +1,4 @@
-class AttendingsController < ApplicationController
+class Api::AttendingsController < ApplicationController
 
     def update
         token = request.headers["Authorization"].split(' ')[1]

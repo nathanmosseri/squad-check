@@ -1,4 +1,4 @@
-class BaseballStatsController < ApplicationController
+class Api::BaseballStatsController < ApplicationController
 
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 

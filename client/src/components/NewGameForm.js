@@ -28,7 +28,7 @@ const NewGameForm = ({setGameCreated}) => {
     const handleSubmit = (e) => {
         let token = localStorage.getItem('token')
         e.preventDefault()
-        fetch('http://localhost:3000/games', {
+        fetch('http://localhost:3000/api/games', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
