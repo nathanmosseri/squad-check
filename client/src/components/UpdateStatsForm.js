@@ -85,7 +85,7 @@ const UpdateStatsForm = ({setStatsUpdated, playerStats, keys, teamSport, sport})
         } else if(teamSport === 'Basketball'){
             sport = 'game_basketball_stats'
         }
-        fetch(`http://localhost:3000/api/${sport}/${sportForm().id}`, {
+        fetch(`https://squad-check.onrender.com/api/${sport}/${sportForm().id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json',

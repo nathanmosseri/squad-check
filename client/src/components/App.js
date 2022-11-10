@@ -36,7 +36,7 @@ function App() {
 useEffect(() => {
         let token = localStorage.getItem('token')
         if(token && !userData.username){
-            fetch('http://localhost:3000/api/me', {
+            fetch('https://squad-check.onrender.com/api/me', {
                 headers: {
                   'Authorization': `Bearer ${token}`
                 }

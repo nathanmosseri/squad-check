@@ -32,7 +32,7 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch('http://localhost:3000/api/teams', {
+        fetch('https://squad-check.onrender.com/api/teams', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -60,7 +60,7 @@ const NewTeamForm = ({isLoggedIn, setNewTeamSubmitted, setTeamJoined}) => {
     const handleJoinSubmit = (e) => {
         e.preventDefault()
         let token = localStorage.getItem('token')
-        fetch('http://localhost:3000/api/memberships', {
+        fetch('https://squad-check.onrender.com/api/memberships', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

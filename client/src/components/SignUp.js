@@ -17,7 +17,7 @@ const SignUp = ({setUserData, setIsLoggedIn, signupData, setSignupData}) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/api/signup', {
+        fetch('https://squad-check.onrender.com/api/signup', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
