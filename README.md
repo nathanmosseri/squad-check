@@ -1,6 +1,6 @@
-Squad-Check is a sports team managment app that allows teammates to view their schedules, stats and attendance for games.
+Squad-Check is a sports team management app that allows teammates to view their schedules, stats and attendance for games.
 Squad check allows users to RSVP for games and let their team know when they wont be able to attend in advance so the team may find a replacement for that game.
-It also keeps tracks of your teams stats and players individual stats across multiple teams and sports.
+It also keeps tracks of your team's stats and player's individual stats across multiple teams and sports.
 
 user stories: 
 - user can create a team and invite teammates 
